@@ -1,0 +1,26 @@
+{
+  "name": "sintaxia_tcc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
+    "install:all": "npm i --prefix frontend && npm i --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictorRibeiroFelix/SINTAXIA_TCC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/VictorRibeiroFelix/SINTAXIA_TCC/issues"
+  },
+  "homepage": "https://github.com/VictorRibeiroFelix/SINTAXIA_TCC#readme",
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}
