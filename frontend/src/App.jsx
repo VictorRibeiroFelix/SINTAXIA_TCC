@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Cadastro from './pages/Cadastro'
 import Desafios from './pages/Desafios'
 import Perfil from './pages/Perfil'
+import Introducao from './pages/Introducao'
 
 const RotaProtegida = ({ children }) => {
   const { usuario, carregando } = useAuth()
@@ -28,6 +29,7 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/desafios" element={<RotaProtegida><Desafios /></RotaProtegida>} />
           <Route path="/perfil" element={<RotaProtegida><Perfil /></RotaProtegida>} />
+          <Route path="/introducao" element={<RotaProtegida><Introducao /></RotaProtegida>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

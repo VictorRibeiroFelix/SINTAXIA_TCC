@@ -23,6 +23,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/desafios', desafioRoutes)
 app.use('/api/perfil', perfilRoutes)
 
+
 app.get('/', (req, res) => {
   res.json({ message: 'API Sintaxia rodando!' })
 })

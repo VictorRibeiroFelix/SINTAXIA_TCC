@@ -2,10 +2,11 @@ import Desafio from '../models/Desafio.js'
 
 export const getDesafios = async (req, res) => {
   try {
-    const { linguagem } = req.query
-    const filtro = linguagem ? { linguagem } : {}
+    const { linguagem, dificuldade } = req.query
+    const filtro = {}
+    if (linguagem) filtro.linguagem = linguagem
+    if (dificuldade) filtro.dificuldade = dificuldade
     const desafios = await Desafio.find(filtro).sort({ nivel: 1 }).lean()
-    
     res.setHeader('Cache-Control', 'no-store')
     return res.status(200).json(desafios)
   } catch (error) {
@@ -28,9 +29,7 @@ export const responderDesafio = async (req, res) => {
     const { resposta } = req.body
     const desafio = await Desafio.findById(req.params.id).lean()
     if (!desafio) return res.status(404).json({ message: 'Desafio não encontrado' })
-
     const correto = resposta.trim().toLowerCase() === desafio.respostaCorreta.trim().toLowerCase()
-
     return res.status(200).json({
       correto,
       respostaCorreta: desafio.respostaCorreta,
