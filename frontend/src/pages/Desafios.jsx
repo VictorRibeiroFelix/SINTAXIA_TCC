@@ -485,7 +485,7 @@ export default function Desafios() {
             padding: '4px 12px', borderRadius: 20
           }}>
             {desafioAtual.tipo === 'pergunta' ? '❓ Pergunta' :
-             desafioAtual.tipo === 'correcao' ? '🔧 Correção' : '💻 Desenvolvimento'}
+            desafioAtual.tipo === 'correcao' ? '🔧 Correção' : '💻 Desenvolvimento'}
           </span>
           <span style={{
             fontSize: 11, color: '#fcd34d',
