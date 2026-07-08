@@ -26,61 +26,111 @@ export default function Cadastro() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0520] flex items-center justify-center">
-      <div className="bg-white/10 backdrop-blur-md border border-purple-500/30 rounded-2xl p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-          Cadastrar
-        </h1>
+    <div style={{
+      width: '100%',
+      height: '100%',
+      background: 'radial-gradient(ellipse at 60% 10%, #2d0b6b 0%, #0a0520 55%)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+      position: 'relative'
+    }}>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {/* Grade de fundo */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.07,
+        backgroundImage: 'linear-gradient(rgba(139,92,246,1) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,1) 1px,transparent 1px)',
+        backgroundSize: '40px 40px'
+      }}/>
+
+      <div style={{
+        background: 'rgba(20,10,60,0.7)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(139,92,246,0.3)',
+        borderRadius: 20,
+        padding: '36px 32px',
+        width: '100%',
+        maxWidth: 420,
+        margin: '0 20px',
+        position: 'relative',
+        zIndex: 1
+      }}>
+        <h1 style={{
+          fontSize: 28, fontWeight: 700, textAlign: 'center', marginBottom: 24,
+          background: 'linear-gradient(135deg,#f472b6,#a78bfa)',
+          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
+        }}>Cadastrar</h1>
+
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <div>
-            <label className="text-purple-300 text-sm mb-1 block">Nome Usuário</label>
+            <label style={{ color: '#c4b5fd', fontSize: 13, display: 'block', marginBottom: 6 }}>Nome Usuário</label>
             <input
               type="text"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
               placeholder="Seu nome"
-              className="w-full bg-white/5 border border-purple-500/40 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-cyan-400"
               required
+              style={{
+                width: '100%', background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(139,92,246,0.4)',
+                borderRadius: 12, padding: '12px 16px',
+                color: '#fff', fontSize: 14, outline: 'none',
+                boxSizing: 'border-box'
+              }}
             />
           </div>
 
           <div>
-            <label className="text-purple-300 text-sm mb-1 block">Email</label>
+            <label style={{ color: '#c4b5fd', fontSize: 13, display: 'block', marginBottom: 6 }}>Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="email@gmail.com"
-              className="w-full bg-white/5 border border-purple-500/40 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-cyan-400"
               required
+              style={{
+                width: '100%', background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(139,92,246,0.4)',
+                borderRadius: 12, padding: '12px 16px',
+                color: '#fff', fontSize: 14, outline: 'none',
+                boxSizing: 'border-box'
+              }}
             />
           </div>
 
           <div>
-            <label className="text-purple-300 text-sm mb-1 block">Senha</label>
+            <label style={{ color: '#c4b5fd', fontSize: 13, display: 'block', marginBottom: 6 }}>Senha</label>
             <input
               type="password"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               placeholder="Sua senha"
-              className="w-full bg-white/5 border border-purple-500/40 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-cyan-400"
               required
+              style={{
+                width: '100%', background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(139,92,246,0.4)',
+                borderRadius: 12, padding: '12px 16px',
+                color: '#fff', fontSize: 14, outline: 'none',
+                boxSizing: 'border-box'
+              }}
             />
           </div>
 
-          {erro && <p className="text-red-400 text-sm text-center">{erro}</p>}
+          {erro && <p style={{ color: '#f87171', fontSize: 13, textAlign: 'center' }}>{erro}</p>}
 
-          <button
-            type="submit"
-            disabled={carregando}
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl mt-2 transition-all disabled:opacity-50"
-          >
+          <button type="submit" disabled={carregando} style={{
+            width: '100%', background: 'linear-gradient(135deg,#7c3aed,#a855f7)',
+            border: 'none', borderRadius: 12, padding: '14px',
+            color: '#fff', fontWeight: 700, fontSize: 15,
+            cursor: carregando ? 'not-allowed' : 'pointer',
+            opacity: carregando ? 0.6 : 1, marginTop: 4
+          }}>
             {carregando ? 'Cadastrando...' : 'Cadastrar'}
           </button>
 
-          <p className="text-center text-cyan-400 text-sm">
-            <Link to="/login">Já possui conta? Fazer Login</Link>
+          <p style={{ textAlign: 'center', fontSize: 13 }}>
+            <Link to="/login" style={{ color: '#22d3ee' }}>Já possui conta? Fazer Login</Link>
           </p>
         </form>
       </div>
