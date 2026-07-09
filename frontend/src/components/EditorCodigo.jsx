@@ -1,22 +1,6 @@
 import { useState } from 'react'
 import Editor from '@monaco-editor/react'
-
-const LINGUAGENS = {
-  algoritmos: {
-    judge0_id: 71,
-    nome: 'Python 3',
-    extensao: 'py',
-    piston_linguagem: 'python',
-    piston_versao: '3.10.0',
-  },
-  javascript: {
-    judge0_id: 63,
-    nome: 'JavaScript',
-    extensao: 'js',
-    piston_linguagem: 'javascript',
-    piston_versao: '18.15.0',
-  },
-}
+import { interpretarPortugol } from '../utils/interpretadorPortugol'
 
 const JUDGE0_KEY = '2877bc76aemshcb45e685c6f6dbfp1ccc52jsnd3458e4a2731'
 
@@ -27,11 +11,19 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
   const [erro, setErro] = useState(null)
   const [acertou, setAcertou] = useState(false)
 
-  const lang = LINGUAGENS[linguagem] || LINGUAGENS.javascript
+  const isPortugol = linguagem === 'algoritmos'
 
-  const normalizar = (str) => (str || '').trim().replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+  const normalizar = (str) =>
+    (str || '').trim().replace(/\r\n/g, '\n').replace(/\r/g, '\n')
 
-  const rodarComJudge0 = async () => {
+  const rodarPortugol = () => {
+    const entradas = desafio.entradaTeste || ''
+    const resultado = interpretarPortugol(codigo, entradas)
+    if (!resultado.sucesso) throw new Error(resultado.erro)
+    return normalizar(resultado.saida)
+  }
+
+  const rodarJavaScript = async () => {
     const response = await fetch(
       'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true',
       {
@@ -42,7 +34,7 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
           'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
         },
         body: JSON.stringify({
-          language_id: lang.judge0_id,
+          language_id: 63,
           source_code: codigo,
           stdin: desafio.entradaTeste || '',
         }),
@@ -54,22 +46,6 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
     return normalizar(data.stdout)
   }
 
-  const rodarComPiston = async () => {
-    const response = await fetch('https://emkc.org/api/v2/piston/execute', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        language: lang.piston_linguagem,
-        version: lang.piston_versao,
-        files: [{ name: `main.${lang.extensao}`, content: codigo }],
-        stdin: desafio.entradaTeste || '',
-      }),
-    })
-    const data = await response.json()
-    if (data.run?.stderr && data.run.stderr.trim()) throw new Error(data.run.stderr)
-    return normalizar(data.run?.output)
-  }
-
   const rodarCodigo = async () => {
     setRodando(true)
     setSaida(null)
@@ -77,13 +53,7 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
     setAcertou(false)
 
     try {
-      let resultado = ''
-      try {
-        resultado = await rodarComJudge0()
-      } catch (e) {
-        // fallback para Piston se Judge0 falhar
-        resultado = await rodarComPiston()
-      }
+      const resultado = isPortugol ? rodarPortugol() : await rodarJavaScript()
 
       setSaida(resultado)
 
@@ -93,7 +63,7 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
         setTimeout(() => onConcluir(desafio.pontos), 1200)
       }
     } catch (err) {
-      setErro(err.message || 'Erro ao executar o código. Verifique a sintaxe.')
+      setErro(err.message || 'Erro ao executar o código.')
     } finally {
       setRodando(false)
     }
@@ -123,13 +93,13 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
         }}>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
             <span style={{ fontSize: 11, color: '#a78bfa', background: 'rgba(139,92,246,0.2)', padding: '3px 10px', borderRadius: 20 }}>
-              💻 Compilador Online
+              💻 Compilador {isPortugol ? 'Portugol' : 'JavaScript'}
             </span>
             <span style={{ fontSize: 11, color: '#fcd34d', background: 'rgba(250,196,75,0.1)', padding: '3px 10px', borderRadius: 20 }}>
               +{desafio.pontos} XP
             </span>
-            <span style={{ fontSize: 11, color: '#94a3b8', background: 'rgba(255,255,255,0.05)', padding: '3px 10px', borderRadius: 20 }}>
-              {lang.nome}
+            <span style={{ fontSize: 11, color: isPortugol ? '#a78bfa' : '#fcd34d', background: 'rgba(255,255,255,0.05)', padding: '3px 10px', borderRadius: 20 }}>
+              {isPortugol ? 'Portugol' : 'JavaScript'}
             </span>
           </div>
           <button onClick={onFechar} style={{ background: 'none', border: 'none', color: '#7c3aed', fontSize: 20, cursor: 'pointer' }}>✕</button>
@@ -161,21 +131,24 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
         </div>
 
         {/* Barra do editor */}
-        <div style={{ padding: '6px 16px', background: 'rgba(5,3,20,0.9)', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{
+          padding: '6px 16px', background: 'rgba(5,3,20,0.9)',
+          display: 'flex', alignItems: 'center', gap: 8
+        }}>
           <div style={{ display: 'flex', gap: 5 }}>
             <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ef4444' }}/>
             <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#f59e0b' }}/>
             <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#22c55e' }}/>
           </div>
           <span style={{ color: '#4c3a8a', fontSize: 11 }}>
-            main.{lang.extensao}
+            main.{isPortugol ? 'por' : 'js'}
           </span>
         </div>
 
         {/* Monaco Editor */}
         <Editor
           height="260px"
-          language={linguagem === 'javascript' ? 'javascript' : 'python'}
+          language={isPortugol ? 'plaintext' : 'javascript'}
           value={codigo}
           onChange={(val) => setCodigo(val || '')}
           theme="vs-dark"
@@ -188,7 +161,6 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
             tabSize: 2,
             wordWrap: 'on',
             padding: { top: 10 },
-            suggestOnTriggerCharacters: true,
           }}
         />
 
@@ -204,7 +176,7 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
 
           {rodando && (
             <div style={{ color: '#a78bfa', fontSize: 13, fontFamily: 'monospace' }}>
-              ⏳ Executando código...
+              ⏳ Executando...
             </div>
           )}
 
@@ -221,19 +193,16 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
                 fontSize: 13, fontFamily: 'monospace',
                 whiteSpace: 'pre-wrap', lineHeight: 1.6
               }}>
-                {saida}
+                {saida || '(sem saída)'}
               </div>
               {acertou && (
-                <div style={{
-                  marginTop: 8, color: '#4ade80', fontWeight: 700, fontSize: 13,
-                  display: 'flex', alignItems: 'center', gap: 6
-                }}>
-                  ✅ Saída correta! +{desafio.pontos} XP conquistados! 🎉
+                <div style={{ marginTop: 8, color: '#4ade80', fontWeight: 700, fontSize: 13 }}>
+                  ✅ Saída correta! +{desafio.pontos} XP conquistados!
                 </div>
               )}
-              {!acertou && (
+              {!acertou && saida !== null && (
                 <div style={{ marginTop: 6, color: '#f87171', fontSize: 12 }}>
-                  ❌ Saída diferente do esperado. Revise seu código e tente novamente!
+                  ❌ Saída diferente do esperado. Revise e tente novamente!
                 </div>
               )}
             </div>
@@ -274,7 +243,6 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
               color: '#fff', fontWeight: 700, fontSize: 14,
               cursor: rodando || acertou ? 'not-allowed' : 'pointer',
               transition: 'all 0.2s',
-              boxShadow: acertou ? '0 4px 20px rgba(34,197,94,0.4)' : '0 4px 20px rgba(124,58,237,0.3)'
             }}
           >
             {acertou ? '✅ Correto!' : rodando ? '⏳ Executando...' : '▶ Executar código'}

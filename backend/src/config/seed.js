@@ -33,20 +33,22 @@ await db.collection('desafios').insertMany([
   { titulo: 'Corrija: Atribuição incorreta', descricao: 'Qual erro existe no algoritmo abaixo?', tipo: 'correcao', linguagem: 'algoritmos', dificuldade: 'intermediario', nivel: 2, codigoBase: 'Início\n  nome == "Victor"\n  Escreva(nome)\nFim', opcoes: ['Usar <- em vez de == para atribuição', 'Trocar Escreva por Leia', 'Remover as aspas do nome', 'Adicionar Leia antes de Escreva'], respostaCorreta: 'Usar <- em vez de == para atribuição', pontos: 20 },
   { titulo: 'Desenvolva: Maior entre dois', descricao: 'Complete o algoritmo que exibe o maior entre dois números.', tipo: 'desenvolvimento', linguagem: 'algoritmos', dificuldade: 'intermediario', nivel: 2, codigoBase: 'Início\n  Leia(a)\n  Leia(b)\n  Se a ___ b Então\n    Escreva("A é maior")\n  Senão\n    Escreva("B é maior")\n  FimSe\nFim', opcoes: ['> b', '< b', '= b', '<> b'], respostaCorreta: '> b', pontos: 20 },
   { titulo: 'Corrija: Variável não definida', descricao: 'O algoritmo abaixo tem um erro. Qual é ele?', tipo: 'correcao', linguagem: 'algoritmos', dificuldade: 'intermediario', nivel: 2, codigoBase: 'Início\n  Leia(idade)\n  Se idade >= 18 Então\n    Escreva(mensagem)\n  FimSe\nFim', opcoes: ['A variável mensagem não foi definida', 'Trocar >= por <=', 'Falta FimAlgoritmo no final', 'Leia deveria ser Escreva'], respostaCorreta: 'A variável mensagem não foi definida', pontos: 20 },
-  {
-    titulo: 'Crie: Calculadora de IMC',
-    descricao: 'Escreva um programa em Python que recebe peso (kg) e altura (m) separados por espaço e calcula o IMC. Fórmula: IMC = peso / (altura * altura). Imprima apenas o valor com 2 casas decimais.\n\nExemplo: entrada "70 1.75" → saída "22.86"',
-    tipo: 'criar', linguagem: 'algoritmos', dificuldade: 'intermediario', nivel: 2,
-    codigoBase: '# Leia peso e altura separados por espaço\npeso, altura = map(float, input().split())\n\n# Calcule o IMC e imprima com 2 casas decimais\n# Dica: use print(f"{valor:.2f}")\n',
-    entradaTeste: '70 1.75', respostaCorreta: '22.86', opcoes: [], pontos: 25
-  },
-  {
-    titulo: 'Crie: Soma dos números pares',
-    descricao: 'Escreva um programa em Python que recebe um número N e imprime a soma de todos os números pares de 1 até N (incluindo N se for par).\n\nExemplo: entrada "10" → saída "30" (2+4+6+8+10)',
-    tipo: 'criar', linguagem: 'algoritmos', dificuldade: 'intermediario', nivel: 2,
-    codigoBase: '# Leia o número N\nn = int(input())\n\n# Some todos os pares de 1 até N e imprima\nsomaTotal = 0\n# Complete o código aqui\n\nprint(somaTotal)\n',
-    entradaTeste: '10', respostaCorreta: '30', opcoes: [], pontos: 25
-  },
+  // desafio 9 do intermediário algoritmos
+{
+  titulo: 'Crie: Calculadora de IMC',
+  descricao: 'Escreva um algoritmo em Portugol que lê peso (kg) e altura (m) e calcula o IMC.\nFórmula: IMC = peso / (altura * altura)\nImprima apenas o valor com 2 casas decimais.\n\nExemplo: entrada "70 1.75" → saída "22.86"',
+  tipo: 'criar', linguagem: 'algoritmos', dificuldade: 'intermediario', nivel: 2,
+  codigoBase: 'Início\n  Real peso, altura, imc\n  Leia(peso, altura)\n  \n  // Calcule o IMC aqui\n  // imc <- ?\n  \n  // Dica: use duas casas decimais\n  Escreva(imc)\nFim',
+  entradaTeste: '70 1.75', respostaCorreta: '22.86', opcoes: [], pontos: 25
+},
+// desafio 10 do intermediário algoritmos
+{
+  titulo: 'Crie: Soma dos números pares',
+  descricao: 'Escreva um algoritmo em Portugol que lê um número N e imprime a soma de todos os números pares de 1 até N.\n\nExemplo: entrada "10" → saída "30" (2+4+6+8+10)',
+  tipo: 'criar', linguagem: 'algoritmos', dificuldade: 'intermediario', nivel: 2,
+  codigoBase: 'Início\n  Inteiro n, i, soma\n  Leia(n)\n  soma <- 0\n  \n  // Some todos os pares de 1 até n\n  Para i <- 1 até n Faça\n    // Complete aqui\n  FimPara\n  \n  Escreva(soma)\nFim',
+  entradaTeste: '10', respostaCorreta: '30', opcoes: [], pontos: 25
+},
 
   // ==================== ALGORITMOS - EXPERIENTE (10) ====================
   { titulo: 'Corrija: Lógica invertida', descricao: 'O algoritmo deveria exibir apenas números pares de 1 a 10, mas está errado. Qual o problema?', tipo: 'correcao', linguagem: 'algoritmos', dificuldade: 'experiente', nivel: 3, codigoBase: 'Início\n  Para i <- 1 até 10 Faça\n    Se i MOD 2 <> 0 Então\n      Escreva(i)\n    FimSe\n  FimPara\nFim', opcoes: ['Trocar <> por = na condição do MOD', 'Trocar Para por Enquanto', 'Remover o MOD', 'Trocar Escreva por Leia'], respostaCorreta: 'Trocar <> por = na condição do MOD', pontos: 30 },
@@ -57,20 +59,22 @@ await db.collection('desafios').insertMany([
   { titulo: 'Corrija: Divisão por zero', descricao: 'O algoritmo abaixo pode causar erro de divisão por zero. Como corrigir?', tipo: 'correcao', linguagem: 'algoritmos', dificuldade: 'experiente', nivel: 3, codigoBase: 'Início\n  Leia(a)\n  Leia(b)\n  resultado <- a / b\n  Escreva(resultado)\nFim', opcoes: ['Verificar se b <> 0 antes de dividir', 'Trocar / por *', 'Usar MOD em vez de /', 'Inicializar b com 1'], respostaCorreta: 'Verificar se b <> 0 antes de dividir', pontos: 30 },
   { titulo: 'Desenvolva: Maior do vetor', descricao: 'Complete o algoritmo que encontra o maior valor de um vetor de 5 elementos.', tipo: 'desenvolvimento', linguagem: 'algoritmos', dificuldade: 'experiente', nivel: 3, codigoBase: 'Início\n  maior <- vetor[1]\n  Para i <- 2 até 5 Faça\n    Se vetor[i] ___ Então\n      maior <- vetor[i]\n    FimSe\n  FimPara\n  Escreva(maior)\nFim', opcoes: ['> maior', '< maior', '= maior', '<> maior'], respostaCorreta: '> maior', pontos: 30 },
   { titulo: 'Corrija: Comparação de strings', descricao: 'O algoritmo deveria verificar se o nome é "Victor", mas tem um erro. Qual é?', tipo: 'correcao', linguagem: 'algoritmos', dificuldade: 'experiente', nivel: 3, codigoBase: 'Início\n  Leia(nome)\n  Se nome = Victor Então\n    Escreva("Olá Victor!")\n  FimSe\nFim', opcoes: ['Victor deveria estar entre aspas: "Victor"', 'Trocar = por ==', 'Remover o Então', 'Trocar Leia por Escreva'], respostaCorreta: 'Victor deveria estar entre aspas: "Victor"', pontos: 30 },
-  {
-    titulo: 'Crie: Verificar número primo',
-    descricao: 'Escreva um programa em Python que recebe um número N e imprime "primo" se for primo ou "nao primo" caso contrário.\n\nExemplo: entrada "17" → saída "primo"\nExemplo: entrada "4" → saída "nao primo"',
-    tipo: 'criar', linguagem: 'algoritmos', dificuldade: 'experiente', nivel: 3,
-    codigoBase: 'n = int(input())\n\n# Verifique se n é primo\n# Um número é primo se só é divisível por 1 e por ele mesmo\nprimo = True\n\n# Complete o código aqui\n\nif primo:\n    print("primo")\nelse:\n    print("nao primo")\n',
-    entradaTeste: '17', respostaCorreta: 'primo', opcoes: [], pontos: 35
-  },
-  {
-    titulo: 'Crie: Sequência de Fibonacci',
-    descricao: 'Escreva um programa em Python que recebe um número N e imprime os N primeiros termos da sequência de Fibonacci, um por linha.\n\nExemplo: entrada "6" → saída:\n0\n1\n1\n2\n3\n5',
-    tipo: 'criar', linguagem: 'algoritmos', dificuldade: 'experiente', nivel: 3,
-    codigoBase: 'n = int(input())\n\n# Gere os N primeiros termos de Fibonacci\na, b = 0, 1\n# Complete o código aqui\n',
-    entradaTeste: '6', respostaCorreta: '0\n1\n1\n2\n3\n5', opcoes: [], pontos: 35
-  },
+  // desafio 9 do experiente algoritmos
+{
+  titulo: 'Crie: Verificar número primo',
+  descricao: 'Escreva um algoritmo em Portugol que lê um número N e escreve "primo" se for primo ou "nao primo" caso contrário.\n\nExemplo: entrada "17" → saída "primo"\nExemplo: entrada "4" → saída "nao primo"',
+  tipo: 'criar', linguagem: 'algoritmos', dificuldade: 'experiente', nivel: 3,
+  codigoBase: 'Início\n  Inteiro n, i\n  Lógico primo\n  Leia(n)\n  primo <- Verdadeiro\n  \n  // Verifique se n é divisível por algum número entre 2 e n-1\n  Para i <- 2 até n-1 Faça\n    // Complete aqui\n  FimPara\n  \n  Se primo = Verdadeiro Então\n    Escreva("primo")\n  Senão\n    Escreva("nao primo")\n  FimSe\nFim',
+  entradaTeste: '17', respostaCorreta: 'primo', opcoes: [], pontos: 35
+},
+// desafio 10 do experiente algoritmos
+{
+  titulo: 'Crie: Sequência de Fibonacci',
+  descricao: 'Escreva um algoritmo em Portugol que lê N e imprime os N primeiros termos da sequência de Fibonacci, um por linha.\n\nExemplo: entrada "6" → saída:\n0\n1\n1\n2\n3\n5',
+  tipo: 'criar', linguagem: 'algoritmos', dificuldade: 'experiente', nivel: 3,
+  codigoBase: 'Início\n  Inteiro n, i, a, b, temp\n  Leia(n)\n  a <- 0\n  b <- 1\n  \n  // Imprima os N primeiros termos de Fibonacci\n  Para i <- 1 até n Faça\n    // Complete aqui\n  FimPara\nFim',
+  entradaTeste: '6', respostaCorreta: '0\n1\n1\n2\n3\n5', opcoes: [], pontos: 35
+},
 
   // ==================== JAVASCRIPT - INICIANTE (10) ====================
   { titulo: 'Console no JavaScript', descricao: 'Qual comando usamos para exibir uma mensagem no console em JavaScript?', tipo: 'pergunta', linguagem: 'javascript', dificuldade: 'iniciante', nivel: 1, opcoes: ['print()', 'console.log()', 'echo()', 'write()'], respostaCorreta: 'console.log()', pontos: 10 },
