@@ -6,6 +6,8 @@ import Cadastro from './pages/Cadastro'
 import Desafios from './pages/Desafios'
 import Perfil from './pages/Perfil'
 import Introducao from './pages/Introducao'
+import VerificarEmail from './pages/VerificarEmail'
+import Amigos from './pages/Amigos'
 
 const RotaProtegida = ({ children }) => {
   const { usuario, carregando } = useAuth()
@@ -30,6 +32,8 @@ function App() {
           <Route path="/desafios" element={<RotaProtegida><Desafios /></RotaProtegida>} />
           <Route path="/perfil" element={<RotaProtegida><Perfil /></RotaProtegida>} />
           <Route path="/introducao" element={<RotaProtegida><Introducao /></RotaProtegida>} />
+          <Route path="/verificar-email" element={<VerificarEmail />} />
+          <Route path="/amigos" element={<RotaProtegida><Amigos /></RotaProtegida>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

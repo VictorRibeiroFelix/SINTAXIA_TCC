@@ -5,6 +5,7 @@ import { connectDB } from './config/db.js'
 import authRoutes from './routes/auth.routes.js'
 import desafioRoutes from './routes/desafio.routes.js'
 import perfilRoutes from './routes/perfil.routes.js'
+import amigosRoutes from './routes/amigos.routes.js'
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ connectDB()
 app.use('/api/auth', authRoutes)
 app.use('/api/desafios', desafioRoutes)
 app.use('/api/perfil', perfilRoutes)
+app.use('/api/amigos', amigosRoutes)
 
 
 app.get('/', (req, res) => {

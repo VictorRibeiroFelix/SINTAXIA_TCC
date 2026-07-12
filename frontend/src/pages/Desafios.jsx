@@ -223,6 +223,14 @@ const INTRO_H = 40
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: 1
         }}>Sintaxia</span>
 
+        <button onClick={() => navigate('/amigos')} style={{
+          background: 'rgba(139,92,246,0.2)',
+          border: '1px solid rgba(139,92,246,0.4)',
+          borderRadius: 8, padding: '5px 12px',
+          color: '#c4b5fd', fontSize: 12, cursor: 'pointer',
+          whiteSpace: 'nowrap'
+        }}>👥 Amigos</button>
+
         <button onClick={() => navigate('/perfil')} style={{
           background: 'rgba(139,92,246,0.2)', border: '1px solid rgba(139,92,246,0.4)',
           borderRadius: 8, padding: '5px 12px', color: '#c4b5fd', fontSize: 12, cursor: 'pointer'

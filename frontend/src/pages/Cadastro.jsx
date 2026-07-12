@@ -12,18 +12,20 @@ export default function Cadastro() {
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setErro('')
-    setCarregando(true)
-    try {
-      await register(nome, email, senha)
-      navigate('/desafios')
-    } catch (error) {
-      setErro('Erro ao cadastrar. Tente novamente.')
-    } finally {
-      setCarregando(false)
-    }
+  e.preventDefault()
+  setErro('')
+  setCarregando(true)
+  try {
+    const data = await register(nome, email, senha)
+    navigate('/verificar-email', {
+      state: { usuarioId: data.usuarioId, email: data.email }
+    })
+  } catch (error) {
+    setErro(error.response?.data?.message || 'Erro ao cadastrar. Tente novamente.')
+  } finally {
+    setCarregando(false)
   }
+}
 
   return (
     <div style={{
