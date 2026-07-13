@@ -300,7 +300,7 @@ const INTRO_H = 40
 
                   {submenuLang === lang.key && (
                     <div style={{
-                      position: 'absolute', left: '100%', top: 0, marginLeft: 6,
+                      position: 'absolute', left: '100%', top: 0, marginLeft: 3,
                       background: 'rgba(10,5,40,0.99)', border: '1px solid rgba(139,92,246,0.3)',
                       borderRadius: 14, padding: 8, minWidth: 210,
                       boxShadow: '0 8px 40px rgba(0,0,0,0.8)', backdropFilter: 'blur(12px)'

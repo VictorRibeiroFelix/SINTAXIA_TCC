@@ -15,7 +15,7 @@ export default function Amigos() {
   const [copiado, setCopiado] = useState(false)
   const navigate = useNavigate()
 
-  const linkConvite = `${window.location.origin}/cadastro?convite=${codigoAmigo}`
+  const linkConvite = `${window.location.origin}/cadastro`
 
   useEffect(() => {
     buscarDados()
@@ -71,11 +71,11 @@ export default function Amigos() {
   }
 
   const copiarLink = () => {
-    navigator.clipboard.writeText(linkConvite)
-    setSucesso('Link copiado!')
-    setTimeout(() => setSucesso(''), 2000)
-  }
-
+  const link = `${window.location.origin}/cadastro`
+  navigator.clipboard.writeText(link)
+  setSucesso('Link copiado!')
+  setTimeout(() => setSucesso(''), 2000)
+}
   const getLiga = (nivel) => {
     if (nivel >= 3) return 'Avançado'
     if (nivel >= 2) return 'Intermediário'
