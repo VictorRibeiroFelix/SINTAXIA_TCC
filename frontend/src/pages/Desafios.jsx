@@ -241,7 +241,9 @@ const INTRO_H = 40
           borderRadius: 16, padding: '4px 10px', color: '#fcd34d', fontSize: 12, fontWeight: 700
         }}>⚡ {xpAtual} XP</span>
 
-        <span style={{ color: '#22d3ee', fontSize: 12 }}>🏅 {concluidos.length}/{desafios.length}</span>
+        <span style={{ color: '#22d3ee', fontSize: 12 }}>
+          🏅{concluidos.length}/{desafios.length}
+        </span>
 
         <button onClick={() => { logout(); navigate('/login') }} style={{
           background: 'none', border: 'none', color: '#f87171', fontSize: 12, cursor: 'pointer'
