@@ -29,18 +29,54 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(helmet({crossOriginResourcePolicy: {policy: 'cross-origin',},}))
-const allowedOrigins = [process.env.FRONTEND_URL,'http://localhost:5173']
+const allowedOrigins = [process.env.FRONTEND_URL,'http://localhost:5173'].filter(Boolean)
 
-app.use(cors({origin(origin, callback){
-  if(!origin) return callback(null,true)
-    if(allowedOrigins.includes(origin))
-      return callback(null,true)
-        callback(new Error('Origin não permitida'))
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin) return callback(null, true)
+    if (allowedOrigins.includes(origin))
+      return callback(null, true)
+    callback(new Error('Origin não permitida'))
   },
-    credentials:true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }))
 
+// ===== SANITIZAÇÃO MANUAL contra NoSQL Injection =====
+const sanitizarMongo = (obj) => {
+  if (obj && typeof obj === 'object') {
+    for (const key of Object.keys(obj)) {
+      if (key.startsWith('$') || key.includes('.')) {
+        delete obj[key]
+      } else {
+        sanitizarMongo(obj[key])
+      }
+    }
+  }
+  return obj
+}
+
+app.use((req, res, next) => {
+    if (req.body) sanitizarMongo(req.body)
+    if (req.params) sanitizarMongo(req.params)
+    if (req.query) sanitizarMongo(req.query)
+    next()
+})
+
 app.set('trust proxy', 1)
+
+// ===== TIMEOUT — evita requisições travadas =====
+app.use((req, res, next) => {
+  res.setTimeout(15000, () => {
+    if (!res.headersSent) {
+      res.status(408).json({
+        message: 'Requisição expirou. Tente novamente.'
+      })
+    }
+  })
+  next()
+})
 
 // Limite geral — protege contra DDoS
 // 300 requisições por 15 minutos por IP
@@ -92,14 +128,17 @@ app.use((req, res) => {
   });
 });
 
+// ===== HANDLER DE ERROS GLOBAL =====
 app.use((err, req, res, next) => {
-    console.error(err)
-    res.status(err.status || 500).json({
-        message:process.env.NODE_ENV === 'production'? 'Erro interno do servidor': err.message
-    })
+  console.error('Erro:', err.message)
+  const status = err.status || 500
+  const message = process.env.NODE_ENV === 'production'
+    ? 'Erro interno do servidor'
+    : err.message
+  res.status(status).json({ message })
 })
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`)
-})
+    console.log(`Servidor rodando na porta ${PORT}`)
+}).on('error', err => {console.error(err)})
