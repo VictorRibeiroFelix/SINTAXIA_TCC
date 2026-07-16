@@ -29,6 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(helmet({crossOriginResourcePolicy: {policy: 'cross-origin',},}))
+
 const allowedOrigins = [process.env.FRONTEND_URL,'http://localhost:5173'].filter(Boolean)
 
 app.use(cors({
@@ -81,26 +82,18 @@ app.use((req, res, next) => {
 // Limite geral — protege contra DDoS
 // 300 requisições por 15 minutos por IP
 const limiteGeral = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 300,
+  windowMs: 15 * 60 * 1000, max: 300,
   skipSuccessfulRequests: true,
-  message: {
-    message: 'Muitas requisições. Tente novamente em alguns minutos.'
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
+  message: {message: 'Muitas requisições. Tente novamente em alguns minutos.'},
+  standardHeaders: true, legacyHeaders: false,
 })
 
 // Bloqueia apenas tentativas ERRADAS de login
 const limiteTentativasLogin = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 3,
+  windowMs: 15 * 60 * 1000,max: 3,
   skipSuccessfulRequests: true,
-  message: {
-    message: 'Você errou 3 vezes. Aguarde 15 minutos para tentar novamente.'
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
+  message: {message: 'Você errou 3 vezes. Aguarde 15 minutos para tentar novamente.'},
+  standardHeaders: true,legacyHeaders: false,
   keyGenerator: (req) => {
     const ip = ipKeyGenerator(req)
     const email = req.body?.email?.toLowerCase().trim() || ''

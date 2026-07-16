@@ -153,9 +153,9 @@ const INTRO_H = 40
   setDesafioAtual(d)
   setRespostaSelecionada(null)
   setResultado(null)
-  if (d.tipo === 'criar') {
-    setEditorAberto(true)
-  }
+    if (d.tipo === 'criar') {
+      setEditorAberto(true)
+    }
 }
 
   const responder = async (opcao) => {
@@ -191,23 +191,23 @@ const INTRO_H = 40
 
   return (
     <div style={{
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  background: 'radial-gradient(ellipse at 60% 10%, #2d0b6b 0%, #0a0520 55%)',
-  color: 'white',
-  fontFamily: 'sans-serif',
-  position: 'relative',
-  overflow: 'hidden'
-}}>
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      background: 'radial-gradient(ellipse at 60% 10%, #2d0b6b 0%, #0a0520 55%)',
+      color: 'white',
+      fontFamily: 'sans-serif',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
 
-      {/* Grade */}
-      <div style={{
-        position: 'fixed', inset: 0, pointerEvents: 'none', opacity: 0.07,
-        backgroundImage: 'linear-gradient(rgba(139,92,246,1) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,1) 1px,transparent 1px)',
-        backgroundSize: '40px 40px'
-      }}/>
+    {/* Grade */}
+    <div style={{
+      position: 'fixed', inset: 0, pointerEvents: 'none', opacity: 0.07,
+      backgroundImage: 'linear-gradient(rgba(139,92,246,1) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,1) 1px,transparent 1px)',
+      backgroundSize: '40px 40px'
+    }}/>
 
       {/* ===== TOPBAR ===== */}
       <div ref={topbarRef} style={{
@@ -218,35 +218,32 @@ const INTRO_H = 40
         boxSizing: 'border-box', width: '100%',
         padding: '0 16px', gap: 10, height: 52
       }}>
-        <span style={{
-          fontSize: 20, fontWeight: 900, marginRight: 'auto',
-          background: 'linear-gradient(135deg,#f472b6,#a78bfa)',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: 1
-        }}>Sintaxia</span>
+      <span style={{
+        fontSize: 20, fontWeight: 900, marginRight: 'auto',
+        background: 'linear-gradient(135deg,#f472b6,#a78bfa)',
+        WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: 1
+      }}>Sintaxia</span>
 
-        <button onClick={() => navigate('/amigos')} style={{
-          background: 'rgba(139,92,246,0.2)',
-          border: '1px solid rgba(139,92,246,0.4)',
-          borderRadius: 8, padding: '5px 12px',
-          color: '#c4b5fd', fontSize: 12, cursor: 'pointer',
-          whiteSpace: 'nowrap'
-        }}>👥 Amigos</button>
+      <button onClick={() => navigate('/amigos')} style={{
+        background: 'rgba(139,92,246,0.2)',
+        border: '1px solid rgba(139,92,246,0.4)',
+        borderRadius: 8, padding: '5px 12px',
+        color: '#c4b5fd', fontSize: 12, cursor: 'pointer',
+        whiteSpace: 'nowrap'
+      }}>👥 Amigos</button>
 
-        <button onClick={() => navigate('/perfil')} style={{
-          background: 'rgba(139,92,246,0.2)', border: '1px solid rgba(139,92,246,0.4)',
-          borderRadius: 8, padding: '5px 12px', color: '#c4b5fd', fontSize: 12, cursor: 'pointer'
-        }}>👤 {usuario?.nome}</button>
+      <button onClick={() => navigate('/perfil')} style={{
+        background: 'rgba(139,92,246,0.2)', border: '1px solid rgba(139,92,246,0.4)',
+        borderRadius: 8, padding: '5px 12px', color: '#c4b5fd', fontSize: 12, cursor: 'pointer'
+      }}>👤 {usuario?.nome}</button>
 
-        <span style={{
-          background: 'rgba(180,120,30,0.25)', border: '1px solid rgba(210,160,50,0.5)',
-          borderRadius: 16, padding: '4px 10px', color: '#fcd34d', fontSize: 12, fontWeight: 700
-        }}>⚡ {xpAtual} XP</span>
+      <span style={{
+        background: 'rgba(180,120,30,0.25)', border: '1px solid rgba(210,160,50,0.5)',
+        borderRadius: 16, padding: '4px 10px', color: '#fcd34d', fontSize: 12, fontWeight: 700
+      }}>⚡ {xpAtual} XP</span>
 
-        <span style={{ color: '#22d3ee', fontSize: 12 }}>
-          🏅{concluidos.length}/{desafios.length}
-        </span>
-
-        <button onClick={() => { logout(); navigate('/login') }} style={{
+      <span style={{ color: '#22d3ee', fontSize: 12 }}> 🏅{concluidos.length}/{desafios.length} </span>
+      <button onClick={() => { logout(); navigate('/login') }} style={{
           background: 'none', border: 'none', color: '#f87171', fontSize: 12, cursor: 'pointer'
         }}>Sair</button>
       </div>
@@ -261,18 +258,18 @@ const INTRO_H = 40
         padding: '0 16px', gap: 10, height: 48, position: 'relative'
       }}>
 
-        {/* Sanduíche */}
-        <div ref={menuRef} style={{ position: 'relative', flexShrink: 0 }}>
-          <button onClick={() => { setMenuAberto(m => !m); setSubmenuLang(null) }} style={{
-            width: 36, height: 36, borderRadius: 8,
-            background: menuAberto ? 'rgba(139,92,246,0.3)' : 'rgba(139,92,246,0.15)',
-            border: `1px solid ${menuAberto ? '#7c3aed' : 'rgba(139,92,246,0.3)'}`,
-            display: 'flex', flexDirection: 'column',
-            alignItems: 'center', justifyContent: 'center', gap: 4,
-            cursor: 'pointer', transition: 'all 0.2s'
-          }}>
-            {[0,1,2].map(i => <span key={i} style={{ display: 'block', width: 16, height: 2, background: '#c4b5fd', borderRadius: 2 }}/>)}
-          </button>
+      {/* Sanduíche */}
+      <div ref={menuRef} style={{ position: 'relative', flexShrink: 0 }}>
+        <button onClick={() => { setMenuAberto(m => !m); setSubmenuLang(null) }} style={{
+          width: 36, height: 36, borderRadius: 8,
+          background: menuAberto ? 'rgba(139,92,246,0.3)' : 'rgba(139,92,246,0.15)',
+          border: `1px solid ${menuAberto ? '#7c3aed' : 'rgba(139,92,246,0.3)'}`,
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center', gap: 4,
+          cursor: 'pointer', transition: 'all 0.2s'
+        }}>
+          {[0,1,2].map(i => <span key={i} style={{ display: 'block', width: 16, height: 2, background: '#c4b5fd', borderRadius: 2 }}/>)}
+        </button>
 
           {menuAberto && (
             <div style={{
@@ -354,117 +351,114 @@ const INTRO_H = 40
 
       {/* ===== ÁREA DO MAPA (scrollável) ===== */}
       <div ref={scrollRef} style={{
-  flex: 1,
-  overflowY: 'auto',
-  overflowX: 'hidden',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
-  padding: '0 20px',
-  scrollbarWidth: 'none',
-  msOverflowStyle: 'none',
-}}>
+        flex: 1,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        padding: '0 20px',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+      }}>
   <style>{`::-webkit-scrollbar{display:none}`}</style>
 
-  {carregando ? (
+    {carregando ? (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', color: '#a78bfa', fontSize: 16, minHeight: 200 }}>
       Carregando mapa...
     </div>
-  ) : (
+    ) : (
     <div style={{
-  position: 'relative',
-  width: '100%',
-  maxWidth: MAP_W,
-  height: MAP_H,
-  margin: '0 auto',
-  flexShrink: 0,
-}}>
+      position: 'relative',
+      width: '100%',
+      maxWidth: MAP_W,
+      height: MAP_H,
+      margin: '0 auto',
+      flexShrink: 0,
+    }}>
 
-            {/* Label no topo */}
-            <div style={{ textAlign: 'center', padding: '12px 0 0', color: 'rgba(167,139,250,0.5)', fontSize: 11 }}>
-              {langAtual?.label} — {nivelAtual?.label} — {pctCompleto}% completo
-            </div>
+    {/* Label no topo */}
+    <div style={{ textAlign: 'center', padding: '12px 0 0', color: 'rgba(167,139,250,0.5)', fontSize: 11 }}>
+      {langAtual?.label} — {nivelAtual?.label} — {pctCompleto}% completo
+    </div>
 
-            {/* SVG linhas */}
-            <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible', pointerEvents: 'none' }}>
-  <line
-    x1={posicoes[0].x + INTRO_W / 2} y1={posicoes[0].y + INTRO_H}
-    x2={posicoes[1].x + NODE / 2}     y2={posicoes[1].y}
-    stroke={jaViuIntro ? '#22d3ee' : 'rgba(139,92,246,0.2)'}
-    strokeWidth={jaViuIntro ? 2.5 : 2}
-    strokeDasharray={jaViuIntro ? '0' : '8 5'}
-    style={{ filter: jaViuIntro ? 'drop-shadow(0 0 5px #22d3ee)' : 'none' }}
-  />
-  {desafios.map((d, i) => {
-    if (i >= desafios.length - 1) return null
-    const a = posicoes[i + 1], b = posicoes[i + 2]
-    if (!a || !b) return null
-    const ok = concluidos.includes(d._id)
-    return (
-      <line key={i}
-        x1={a.x + NODE / 2} y1={a.y + NODE / 2}
-        x2={b.x + NODE / 2} y2={b.y + NODE / 2}
-        stroke={ok ? '#22d3ee' : 'rgba(139,92,246,0.2)'}
-        strokeWidth={ok ? 2.5 : 2}
-        strokeDasharray={ok ? '0' : '8 5'}
-        style={{ filter: ok ? 'drop-shadow(0 0 5px #22d3ee)' : 'none' }}
+    {/* SVG linhas */}
+    <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible', pointerEvents: 'none' }}>
+      <line
+        x1={posicoes[0].x + INTRO_W / 2} y1={posicoes[0].y + INTRO_H}
+        x2={posicoes[1].x + NODE / 2}     y2={posicoes[1].y}
+        stroke={jaViuIntro ? '#22d3ee' : 'rgba(139,92,246,0.2)'}
+        strokeWidth={jaViuIntro ? 2.5 : 2}
+        strokeDasharray={jaViuIntro ? '0' : '8 5'}
+        style={{ filter: jaViuIntro ? 'drop-shadow(0 0 5px #22d3ee)' : 'none' }}
       />
-    )
-  })}
-</svg>
+      {desafios.map((d, i) => {
+      if (i >= desafios.length - 1) return null
+      const a = posicoes[i + 1], b = posicoes[i + 2]
+      if (!a || !b) return null
+      const ok = concluidos.includes(d._id)
+      return (
+        <line key={i}
+          x1={a.x + NODE / 2} y1={a.y + NODE / 2}
+          x2={b.x + NODE / 2} y2={b.y + NODE / 2}
+          stroke={ok ? '#22d3ee' : 'rgba(139,92,246,0.2)'}
+          strokeWidth={ok ? 2.5 : 2}
+          strokeDasharray={ok ? '0' : '8 5'}
+          style={{ filter: ok ? 'drop-shadow(0 0 5px #22d3ee)' : 'none' }}
+        />
+      )
+      })}
+    </svg>
 
-            {/* Nó Introdução */}
-            <div onClick={() => navigate('/introducao', { state: { linguagem } })} style={{
-              position: 'absolute', left: posicoes[0].x, top: posicoes[0].y,
-              width: INTRO_W, height: INTRO_H, borderRadius: 10,
-              background: jaViuIntro ? 'rgba(34,211,238,0.15)' : 'rgba(250,196,75,0.15)',
-              border: `2px solid ${jaViuIntro ? '#22d3ee' : '#fac44b'}`,
-              boxShadow: jaViuIntro ? '0 0 16px rgba(34,211,238,0.4)' : '0 0 16px rgba(250,196,75,0.4)',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', transition: 'transform 0.15s', userSelect: 'none', gap: 2,
-              backdropFilter: 'blur(8px)'
+    {/* Nó Introdução */}
+    <div onClick={() => navigate('/introducao', { state: { linguagem } })} style={{
+      position: 'absolute', left: posicoes[0].x, top: posicoes[0].y,
+      width: INTRO_W, height: INTRO_H, borderRadius: 10,
+      background: jaViuIntro ? 'rgba(34,211,238,0.15)' : 'rgba(250,196,75,0.15)',
+      border: `2px solid ${jaViuIntro ? '#22d3ee' : '#fac44b'}`,
+      boxShadow: jaViuIntro ? '0 0 16px rgba(34,211,238,0.4)' : '0 0 16px rgba(250,196,75,0.4)',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      cursor: 'pointer', transition: 'transform 0.15s', userSelect: 'none', gap: 2,
+      backdropFilter: 'blur(8px)'
+      }}
+      onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
+      onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span style={{ fontSize: 11 }}>📖</span>
+          <span style={{ fontSize: 11, fontWeight: 700, color: jaViuIntro ? '#22d3ee' : '#fac44b' }}>Introdução</span>
+        </div>
+          <span style={{ fontSize: 9, color: jaViuIntro ? '#22d3ee' : '#fac44b', opacity: 0.8 }}></span>
+        </div>
+
+      {/* Nós dos desafios */}
+      {desafios.map((d, i) => {
+      const pos = posicoes[i + 1]
+        if (!pos) return null
+          const status = getStatus(d, i)
+          const c = cores[status]
+          return (
+          <div key={d._id} onClick={() => abrirDesafio(d, i)} style={{
+            position: 'absolute', left: pos.x, top: pos.y,
+            width: NODE, height: NODE, borderRadius: 16,
+            background: c.bg, border: `2px solid ${c.border}`, boxShadow: c.shadow,
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            cursor: status === 'bloqueado' ? 'not-allowed' : 'pointer',
+            transition: 'transform 0.15s', userSelect: 'none', backdropFilter: 'blur(8px)'
             }}
-            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
+            onMouseEnter={e => { if (status !== 'bloqueado') e.currentTarget.style.transform = 'scale(1.1)' }}
             onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                <span style={{ fontSize: 11 }}>📖</span>
-                <span style={{ fontSize: 11, fontWeight: 700, color: jaViuIntro ? '#22d3ee' : '#fac44b' }}>Introdução</span>
-              </div>
-              <span style={{ fontSize: 9, color: jaViuIntro ? '#22d3ee' : '#fac44b', opacity: 0.8 }}>
-              </span>
-            </div>
-
-            {/* Nós dos desafios */}
-            {desafios.map((d, i) => {
-              const pos = posicoes[i + 1]
-              if (!pos) return null
-              const status = getStatus(d, i)
-              const c = cores[status]
-              return (
-                <div key={d._id} onClick={() => abrirDesafio(d, i)} style={{
-                  position: 'absolute', left: pos.x, top: pos.y,
-                  width: NODE, height: NODE, borderRadius: 16,
-                  background: c.bg, border: `2px solid ${c.border}`, boxShadow: c.shadow,
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                  cursor: status === 'bloqueado' ? 'not-allowed' : 'pointer',
-                  transition: 'transform 0.15s', userSelect: 'none', backdropFilter: 'blur(8px)'
-                }}
-                onMouseEnter={e => { if (status !== 'bloqueado') e.currentTarget.style.transform = 'scale(1.1)' }}
-                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                  <span style={{ fontSize: status === 'bloqueado' ? 24 : 20, lineHeight: 1 }}>
-                    {status === 'concluido' ? '⚡' : status === 'bloqueado' ? '🔒' : i + 1}
-                  </span>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: c.color, marginTop: 3 }}>+{d.pontos}XP</span>
-                </div>
-              )
-            })}
-
-            {/* Espaço no final */}
-            <div style={{ height: 40 }}/>
+          >
+            <span style={{ fontSize: status === 'bloqueado' ? 24 : 20, lineHeight: 1 }}>
+              {status === 'concluido' ? '⚡' : status === 'bloqueado' ? '🔒' : i + 1}
+            </span>
+            <span style={{ fontSize: 10, fontWeight: 700, color: c.color, marginTop: 3 }}>+{d.pontos}XP</span>
           </div>
-        )}
+          )
+      })}
+
+      {/* Espaço no final */}
+        <div style={{ height: 40 }}/></div>)}
       </div>
 
       {/* ===== SETA PARA BAIXO ===== */}

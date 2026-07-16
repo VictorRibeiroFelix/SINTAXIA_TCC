@@ -23,9 +23,6 @@ const desafioSchema = new mongoose.Schema({
   respostaCorreta: String,
   codigoBase: String,
   pontos: Number
-}, {
-  collection: 'desafios',
-  timestamps: true
-})
+}, {collection: 'desafios', timestamps: true})
 
 export default mongoose.model('Desafio', desafioSchema)

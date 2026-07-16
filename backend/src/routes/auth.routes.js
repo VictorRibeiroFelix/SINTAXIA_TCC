@@ -36,8 +36,7 @@ const validarLogin = [
     .trim()
     .notEmpty().withMessage('Email é obrigatório')
     .isEmail().withMessage('Email inválido')
-    .normalizeEmail(),
-  body('senha')
+    .normalizeEmail(), body('senha')
     .notEmpty().withMessage('Senha é obrigatória'),
 ]
 
