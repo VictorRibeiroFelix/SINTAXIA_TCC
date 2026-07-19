@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(helmet({crossOriginResourcePolicy: {policy: 'cross-origin',},}))
 
-const allowedOrigins = [process.env.FRONTEND_URL,'http://localhost:5173'].filter(Boolean)
+const allowedOrigins = [process.env.FRONTEND_URL,'http://localhost:5173', 'https://sintaxia-backend.onrender.com'].filter(Boolean)
 
 app.use(cors({
   origin(origin, callback) {
