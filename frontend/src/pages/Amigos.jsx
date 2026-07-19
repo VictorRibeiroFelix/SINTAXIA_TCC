@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 
-const MEDALHAS_NIVEL = { 1: '🌱', 2: '🔥', 3: '⚡' }
+const MEDALHAS_NIVEL = { 1: '🔥' }
 
 export default function Amigos() {
   const [ranking, setRanking] = useState([])
@@ -245,7 +245,7 @@ export default function Amigos() {
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontSize: 16, flexShrink: 0
                       }}>
-                        {MEDALHAS_NIVEL[pessoa.nivel] || '🌱'}
+                        {MEDALHAS_NIVEL[pessoa.nivel]}
                       </div>
 
                       {/* Nome e liga */}
