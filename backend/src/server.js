@@ -12,6 +12,12 @@ import morgan from 'morgan'
 
 dotenv.config()
 
+console.log('==============================')
+console.log('NODE_ENV:', process.env.NODE_ENV)
+console.log('FRONTEND_URL:', process.env.FRONTEND_URL)
+console.log('PORT:', process.env.PORT)
+console.log('==============================')
+
 try {
   await connectDB();
 } catch (err) {
@@ -30,19 +36,35 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(helmet({crossOriginResourcePolicy: {policy: 'cross-origin',},}))
 
-const allowedOrigins = [process.env.FRONTEND_URL,'http://localhost:5173', 'https://sintaxia-backend.onrender.com'].filter(Boolean)
+const allowedOrigins = [process.env.FRONTEND_URL,'http://localhost:5173'].filter(Boolean)
 
-app.use(cors({
-  origin(origin, callback) {
-    if (!origin) return callback(null, true)
-    if (allowedOrigins.includes(origin))
-      return callback(null, true)
-    callback(new Error('Origin não permitida'))
-  },
+const corsOptions = {
+    origin(origin, callback) {
+        console.log('Origin recebida:', origin)
+        console.log('Origins permitidas:', allowedOrigins)
+        if (!origin)
+            return callback(null, true)
+        if (allowedOrigins.includes(origin)) {
+            console.log('Origin permitida')
+            return callback(null, true)
+        }
+        console.log('Origin bloqueada')
+        return callback(null, false)
+    },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-}))
+}
+
+app.use(cors(corsOptions))
+
+app.use((req, res, next) => {
+  console.log('==========================')
+  console.log(req.method, req.originalUrl)
+  console.log('Origin:', req.headers.origin)
+  console.log('==========================')
+  next()
+})
 
 // ===== SANITIZAÇÃO MANUAL contra NoSQL Injection =====
 const sanitizarMongo = (obj) => {
@@ -83,6 +105,7 @@ app.use((req, res, next) => {
 // 300 requisições por 15 minutos por IP
 const limiteGeral = rateLimit({
   windowMs: 15 * 60 * 1000, max: 300,
+  skip: (req) => req.method === 'OPTIONS',
   skipSuccessfulRequests: true,
   message: {message: 'Muitas requisições. Tente novamente em alguns minutos.'},
   standardHeaders: true, legacyHeaders: false,
