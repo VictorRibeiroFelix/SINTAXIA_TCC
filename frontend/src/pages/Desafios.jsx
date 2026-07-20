@@ -112,6 +112,8 @@ const INTRO_H = 40
 
   const buscarDesafios = async () => {
     console.log("Buscando desafios...")
+    setDesafios([]);
+    setConcluidos([]);
     try {
       setCarregando(true)
       const { data } = await api.get(`/desafios?linguagem=${linguagem}&dificuldade=${nivel}`)
