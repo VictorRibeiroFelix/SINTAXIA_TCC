@@ -342,6 +342,8 @@ const INTRO_H = 40
           )}
         </div>
 
+        {/* Centro */}
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
     {console.log("========== CENTRO ==========")}
     {console.log("linguagem:", linguagem)}
     {console.log("nivel:", nivel)}
@@ -351,9 +353,6 @@ const INTRO_H = 40
     {console.log("desafios:", desafios.length)}
     {console.log("pctCompleto:", pctCompleto)}
     {console.log("==========================")}
-
-        {/* Centro */}
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
           <span style={{ fontSize: 15 }}>{langAtual?.icone}</span>
           <span style={{ fontSize: 13, fontWeight: 700, color: langAtual?.cor }}>{langAtual?.label}</span>
           <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
