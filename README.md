@@ -28,7 +28,16 @@ O projeto foi desenvolvido como **Trabalho de Conclusão de Curso (TCC)** do cur
 
 ---
 
-# ✨ Funcionalidades
+# Demonstração Online
+
+Acesse a versão publicada da aplicação:
+
+🌐 **Aplicação:**  
+[sintaxia-tcc.vercel.app]
+
+---
+
+# Funcionalidades
 
 ## 👤 Autenticação
 
@@ -136,17 +145,17 @@ Cada usuário recebe um código exclusivo.
 
 Exemplo:
 
-```
+```text
 ABCD-1234
 ```
 
 Também é possível:
 
-- Enviar convite
-- Aceitar convite
-- Visualizar amigos
-- Ranking por XP
+- Código único por usuário (ex: ABCD-1234)
+- Adicionar amigos pelo código
 - Compartilhar link de convite
+- Visualizar ranking de XP entre amigos
+- Remover amigos
 
 ---
 
@@ -169,7 +178,7 @@ O projeto utiliza diversas técnicas de segurança.
 - Bcrypt
 - Helmet
 - Rate Limiting
-- Sanitização XSS
+- Sanitização
 - Proteção contra NoSQL Injection
 - CORS restrito
 - Validação de dados
@@ -268,7 +277,7 @@ sintaxia/
 ## 1 Clone o projeto
 
 ```bash
-git clone https://github.com/seuusuario/sintaxia.git
+git clone https://github.com/VictorRibeiroFelix/SINTAXIA_TCC.git
 ```
 
 ---
@@ -307,6 +316,13 @@ FRONTEND_URL=http://localhost:5173
 NODE_ENV=development
 ```
 
+---
+
+## 4.1 Configure o arquivo `frontend/.env.local`
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
 ---
 
 ## 5 Popule o banco
@@ -458,11 +474,3 @@ Orientador:
 # ⭐ Agradecimentos
 
 Agradecimentos aos professores, colegas e à FEMA/IMESA pelo apoio durante o desenvolvimento deste projeto.
-
----
-
-<p align="center">
-
-Feito com ❤️ utilizando React, Node.js, MongoDB e muita paixão por ensinar programação.
-
-</p>
