@@ -111,6 +111,7 @@ const INTRO_H = 40
   }
 
   const buscarDesafios = async () => {
+    console.log("Buscando desafios...")
     try {
       setCarregando(true)
       const { data } = await api.get(`/desafios?linguagem=${linguagem}&dificuldade=${nivel}`)
@@ -172,6 +173,7 @@ const INTRO_H = 40
         const ua = { ...JSON.parse(localStorage.getItem('usuario') || '{}'), pontuacaoTotal: pf.pontuacaoTotal, nivel: pf.nivel }
         localStorage.setItem('usuario', JSON.stringify(ua))
         setXpAtual(pf.pontuacaoTotal)
+        await buscarDesafios()
       }
     } catch (err) { console.error(err) }
   }
@@ -187,7 +189,9 @@ const INTRO_H = 40
   const jaViuIntro  = localStorage.getItem(`introducao_${linguagem}`)
   const langAtual   = linguagens.find(l => l.key === linguagem)
   const nivelAtual  = niveis.find(n => n.key === nivel)
-  const pctCompleto = desafios.length > 0 ? Math.round((concluidos.length / desafios.length) * 100) : 0
+  const totalConcluidos = concluidos.length
+  const totalDesafios = desafios.length
+  const pctCompleto = totalDesafios? Math.round((totalConcluidos / totalDesafios) * 100) : 0
 
   return (
     <div style={{
@@ -242,7 +246,7 @@ const INTRO_H = 40
         borderRadius: 16, padding: '4px 10px', color: '#fcd34d', fontSize: 12, fontWeight: 700
       }}>⚡ {xpAtual} XP</span>
 
-      <span style={{ color: '#22d3ee', fontSize: 12 }}> 🏅{concluidos.length}/{desafios.length} </span>
+      <span style={{ color: '#22d3ee', fontSize: 12 }}> 🏅{concluidos.length}/{desafios.length || '--'} </span>
       <button onClick={() => { logout(); navigate('/login') }} style={{
           background: 'none', border: 'none', color: '#f87171', fontSize: 12, cursor: 'pointer'
         }}>Sair</button>
