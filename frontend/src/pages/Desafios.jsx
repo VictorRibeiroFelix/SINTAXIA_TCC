@@ -213,16 +213,6 @@ const INTRO_H = 40
       backgroundSize: '40px 40px'
     }}/>
 
-    {console.log("========== TOPO ==========")}
-    {console.log("linguagem:", linguagem)}
-    {console.log("nivel:", nivel)}
-    {console.log("nivelAtual:", nivelAtual)}
-    {console.log("langAtual:", langAtual)}
-    {console.log("concluidos:", concluidos.length)}
-    {console.log("desafios:", desafios.length)}
-    {console.log("pctCompleto:", pctCompleto)}
-    {console.log("==========================")}
-
       {/* ===== TOPBAR ===== */}
       <div ref={topbarRef} style={{
         flexShrink: 0, zIndex: 100,
@@ -349,6 +339,16 @@ const INTRO_H = 40
             </div>
           )}
         </div>
+
+    {console.log("========== CENTRO ==========")}
+    {console.log("linguagem:", linguagem)}
+    {console.log("nivel:", nivel)}
+    {console.log("nivelAtual:", nivelAtual)}
+    {console.log("langAtual:", langAtual)}
+    {console.log("concluidos:", concluidos.length)}
+    {console.log("desafios:", desafios.length)}
+    {console.log("pctCompleto:", pctCompleto)}
+    {console.log("==========================")}
 
         {/* Centro */}
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
