@@ -193,16 +193,11 @@ const INTRO_H = 40
   const totalDesafios = desafios.length
   const pctCompleto = totalDesafios? Math.round((totalConcluidos / totalDesafios) * 100) : 0
 
-  console.log("ESTADO DA TELA", {
+console.log("TOPO", {
   linguagem,
-  nivel,
-  langAtual,
   nivelAtual,
-  concluidos: concluidos.length,
-  desafios: desafios.length,
-  pctCompleto
-  })
-
+  pctCompleto,
+});
 
   return (
     <div style={{
@@ -358,7 +353,7 @@ const INTRO_H = 40
           <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
           <span style={{ fontSize: 12, color: '#94a3b8' }}>{nivelAtual?.icone} {nivelAtual?.label}</span>
           <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
-          <span style={{ fontSize: 12, color: '#64748b' }}>{console.log("CENTRO", pctCompleto)}{pctCompleto}%</span>
+          <span style={{ fontSize: 12, color: '#64748b' }}>TESTE {pctCompleto}%</span>
         </div>
 
         <div style={{ width: 36, flexShrink: 0 }}/>
@@ -394,7 +389,7 @@ const INTRO_H = 40
 
     {/* Label no topo */}
     <div style={{ textAlign: 'center', padding: '12px 0 0', color: 'rgba(167,139,250,0.5)', fontSize: 11 }}>
-      {console.log("LABEL", pctCompleto)}
+      TESTE DE BAIXO {pctCompleto}
       {langAtual?.label} — {nivelAtual?.label} — {pctCompleto}% completo
     </div>
 
