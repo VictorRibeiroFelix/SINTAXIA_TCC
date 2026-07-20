@@ -213,15 +213,15 @@ const INTRO_H = 40
       backgroundSize: '40px 40px'
     }}/>
 
-    console.log("========== TOPO ==========");
-    console.log("linguagem:", linguagem);
-    console.log("nivel:", nivel);
-    console.log("nivelAtual:", nivelAtual);
-    console.log("langAtual:", langAtual);
-    console.log("concluidos:", concluidos.length);
-    console.log("desafios:", desafios.length);
-    console.log("pctCompleto:", pctCompleto);
-    console.log("==========================");
+    {console.log("========== TOPO ==========")}
+    {console.log("linguagem:", linguagem)}
+    {console.log("nivel:", nivel)}
+    {console.log("nivelAtual:", nivelAtual)}
+    {console.log("langAtual:", langAtual)}
+    {console.log("concluidos:", concluidos.length)}
+    {console.log("desafios:", desafios.length)}
+    {console.log("pctCompleto:", pctCompleto)}
+    {console.log("==========================")}
 
       {/* ===== TOPBAR ===== */}
       <div ref={topbarRef} style={{
@@ -391,18 +391,19 @@ const INTRO_H = 40
       flexShrink: 0,
     }}>
 
-    console.log("========== LABEL ==========");
-    console.log("linguagem:", linguagem);
-    console.log("nivel:", nivel);
-    console.log("nivelAtual:", nivelAtual);
-    console.log("langAtual:", langAtual);
-    console.log("concluidos:", concluidos.length);
-    console.log("desafios:", desafios.length);
-    console.log("pctCompleto:", pctCompleto);
-    console.log("==========================");
+    
 
     {/* Label no topo */}
     <div style={{ textAlign: 'center', padding: '12px 0 0', color: 'rgba(167,139,250,0.5)', fontSize: 11 }}>
+    {console.log("========== LABEL ==========")}
+    {console.log("linguagem:", linguagem)}
+    {console.log("nivel:", nivel)}
+    {console.log("nivelAtual:", nivelAtual)}
+    {console.log("langAtual:", langAtual)}
+    {console.log("concluidos:", concluidos.length)}
+    {console.log("desafios:", desafios.length)}
+    {console.log("pctCompleto:", pctCompleto)}
+    {console.log("==========================")}
       {langAtual?.label} — {nivelAtual?.label} — {pctCompleto}% completo
     </div>
 
