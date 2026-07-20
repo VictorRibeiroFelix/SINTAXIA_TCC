@@ -193,12 +193,6 @@ const INTRO_H = 40
   const totalDesafios = desafios.length
   const pctCompleto = totalDesafios? Math.round((totalConcluidos / totalDesafios) * 100) : 0
 
-console.log("TOPO", {
-  linguagem,
-  nivelAtual,
-  pctCompleto,
-});
-
   return (
     <div style={{
       width: '100%',
@@ -218,6 +212,16 @@ console.log("TOPO", {
       backgroundImage: 'linear-gradient(rgba(139,92,246,1) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,1) 1px,transparent 1px)',
       backgroundSize: '40px 40px'
     }}/>
+
+    console.log("========== TOPO ==========");
+    console.log("linguagem:", linguagem);
+    console.log("nivel:", nivel);
+    console.log("nivelAtual:", nivelAtual);
+    console.log("langAtual:", langAtual);
+    console.log("concluidos:", concluidos.length);
+    console.log("desafios:", desafios.length);
+    console.log("pctCompleto:", pctCompleto);
+    console.log("==========================");
 
       {/* ===== TOPBAR ===== */}
       <div ref={topbarRef} style={{
@@ -353,7 +357,7 @@ console.log("TOPO", {
           <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
           <span style={{ fontSize: 12, color: '#94a3b8' }}>{nivelAtual?.icone} {nivelAtual?.label}</span>
           <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
-          <span style={{ fontSize: 12, color: '#64748b' }}>TESTE {pctCompleto}%</span>
+          <span style={{ fontSize: 12, color: '#64748b' }}>{pctCompleto}%</span>
         </div>
 
         <div style={{ width: 36, flexShrink: 0 }}/>
@@ -387,9 +391,18 @@ console.log("TOPO", {
       flexShrink: 0,
     }}>
 
+    console.log("========== LABEL ==========");
+    console.log("linguagem:", linguagem);
+    console.log("nivel:", nivel);
+    console.log("nivelAtual:", nivelAtual);
+    console.log("langAtual:", langAtual);
+    console.log("concluidos:", concluidos.length);
+    console.log("desafios:", desafios.length);
+    console.log("pctCompleto:", pctCompleto);
+    console.log("==========================");
+
     {/* Label no topo */}
     <div style={{ textAlign: 'center', padding: '12px 0 0', color: 'rgba(167,139,250,0.5)', fontSize: 11 }}>
-      TESTE DE BAIXO {pctCompleto}
       {langAtual?.label} — {nivelAtual?.label} — {pctCompleto}% completo
     </div>
 
