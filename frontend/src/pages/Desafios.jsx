@@ -193,6 +193,17 @@ const INTRO_H = 40
   const totalDesafios = desafios.length
   const pctCompleto = totalDesafios? Math.round((totalConcluidos / totalDesafios) * 100) : 0
 
+  console.log("ESTADO DA TELA", {
+  linguagem,
+  nivel,
+  langAtual,
+  nivelAtual,
+  concluidos: concluidos.length,
+  desafios: desafios.length,
+  pctCompleto
+  })
+
+
   return (
     <div style={{
       width: '100%',
@@ -246,7 +257,7 @@ const INTRO_H = 40
         borderRadius: 16, padding: '4px 10px', color: '#fcd34d', fontSize: 12, fontWeight: 700
       }}>⚡ {xpAtual} XP</span>
 
-      <span style={{ color: '#22d3ee', fontSize: 12 }}> 🏅{concluidos.length}/{desafios.length || '--'} </span>
+      <span style={{ color: '#22d3ee', fontSize: 12 }}> 🏅{concluidos.length}/{desafios.length} </span>
       <button onClick={() => { logout(); navigate('/login') }} style={{
           background: 'none', border: 'none', color: '#f87171', fontSize: 12, cursor: 'pointer'
         }}>Sair</button>
@@ -347,7 +358,7 @@ const INTRO_H = 40
           <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
           <span style={{ fontSize: 12, color: '#94a3b8' }}>{nivelAtual?.icone} {nivelAtual?.label}</span>
           <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
-          <span style={{ fontSize: 12, color: '#64748b' }}>{pctCompleto}%</span>
+          <span style={{ fontSize: 12, color: '#64748b' }}>{console.log("CENTRO", pctCompleto)}{pctCompleto}%</span>
         </div>
 
         <div style={{ width: 36, flexShrink: 0 }}/>
@@ -383,6 +394,7 @@ const INTRO_H = 40
 
     {/* Label no topo */}
     <div style={{ textAlign: 'center', padding: '12px 0 0', color: 'rgba(167,139,250,0.5)', fontSize: 11 }}>
+      {console.log("LABEL", pctCompleto)}
       {langAtual?.label} — {nivelAtual?.label} — {pctCompleto}% completo
     </div>
 
