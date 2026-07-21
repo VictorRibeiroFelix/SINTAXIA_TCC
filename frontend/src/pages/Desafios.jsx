@@ -346,19 +346,7 @@ const INTRO_H = 40
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
           <span style={{ fontSize: 15 }}>{langAtual?.icone}</span>
           <span style={{ fontSize: 13, fontWeight: 700, color: langAtual?.cor }}>{langAtual?.label}</span>
-          <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
-    {console.log("========== CENTRO ==========")}
-    {console.log("linguagem:", linguagem)}
-    {console.log("nivel:", nivel)}
-    {console.log("nivelAtual:", nivelAtual)}
-    {console.log("langAtual:", langAtual)}
-    {console.log("concluidos:", concluidos.length)}
-    {console.log("desafios:", desafios.length)}
-    {console.log("pctCompleto:", pctCompleto)}
-    {console.log("==========================")}
-          <span style={{ fontSize: 12, color: '#94a3b8' }}>{nivelAtual?.icone} {nivelAtual?.label}</span>
-          <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
-          <span style={{ fontSize: 12, color: '#64748b' }}>TESTE  {pctCompleto}%</span>
+            — {nivelAtual?.label} — {pctCompleto}% completo
         </div>
 
         <div style={{ width: 36, flexShrink: 0 }}/>
@@ -396,15 +384,6 @@ const INTRO_H = 40
 
     {/* Label no topo */}
     <div style={{ textAlign: 'center', padding: '12px 0 0', color: 'rgba(167,139,250,0.5)', fontSize: 11 }}>
-    {console.log("========== LABEL ==========")}
-    {console.log("linguagem:", linguagem)}
-    {console.log("nivel:", nivel)}
-    {console.log("nivelAtual:", nivelAtual)}
-    {console.log("langAtual:", langAtual)}
-    {console.log("concluidos:", concluidos.length)}
-    {console.log("desafios:", desafios.length)}
-    {console.log("pctCompleto:", pctCompleto)}
-    {console.log("==========================")}
       {langAtual?.label} — {nivelAtual?.label} — {pctCompleto}% completo
     </div>
 
