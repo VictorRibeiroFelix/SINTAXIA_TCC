@@ -16,7 +16,7 @@ export const register = async (req, res) => {
 
     const senhaCriptografada = await bcrypt.hash(senha, 10)
     const codigo = gerarCodigo()
-    const expiracao = new Date(Date.now() + 15 * 60 * 1000) // 15 min
+    const expiracao = new Date(Date.now() + 15 * 60 * 1000)
 
     const usuario = await Usuario.create({
       nome,
@@ -27,13 +27,18 @@ export const register = async (req, res) => {
       codigoExpiracao: expiracao,
     })
 
-    await enviarEmailVerificacao(email, nome, codigo)
-
+    // Responde IMEDIATAMENTE — não espera o email
     res.status(201).json({
       message: 'Cadastro realizado! Verifique seu email.',
       usuarioId: usuario._id,
       email: usuario.email,
     })
+
+    // Envia email em background sem bloquear a resposta
+    enviarEmailVerificacao(email, nome, codigo).catch(err => {
+      console.error('Erro ao enviar email:', err.message)
+    })
+
   } catch (error) {
     res.status(500).json({ message: 'Erro no servidor', error: error.message })
   }

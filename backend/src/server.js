@@ -91,12 +91,9 @@ app.set('trust proxy', 1)
 
 // ===== TIMEOUT — evita requisições travadas =====
 app.use((req, res, next) => {
-  res.setTimeout(15000, () => {
-    if (!res.headersSent) {
-      res.status(408).json({
-        message: 'Requisição expirou. Tente novamente.'
-      })
-    }
+  const timeout = req.path.includes('/auth') ? 30000 : 15000
+  res.setTimeout(timeout, () => {
+    res.status(408).json({ message: 'Requisição expirou. Tente novamente.' })
   })
   next()
 })
