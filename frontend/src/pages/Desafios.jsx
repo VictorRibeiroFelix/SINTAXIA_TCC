@@ -6,13 +6,13 @@ import api from '../services/api'
 
 const linguagens = [
   { key: 'algoritmos', label: 'Algoritmos', cor: '#7c3aed' },
-  { key: 'javascript', label: 'JavaScript',cor: '#eab308' },
+  { key: 'javascript', label: 'JavaScript', cor: '#eab308' },
 ]
 
 const niveis = [
-  { key: 'iniciante',     label: 'Iniciante', desc: 'Conceitos básicos' },
+  { key: 'iniciante',     label: 'Iniciante',    desc: 'Conceitos básicos' },
   { key: 'intermediario', label: 'Intermediário', desc: 'Aprofundando o conhecimento' },
-  { key: 'experiente',    label: 'Experiente', desc: 'Desafios avançados' },
+  { key: 'experiente',    label: 'Experiente',   desc: 'Desafios avançados' },
 ]
 
 export default function Desafios() {
@@ -342,13 +342,13 @@ const INTRO_H = 40
         </div>
 
         {/* Centro */}
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-          <span style={{ fontSize: 13, fontWeight: 700, color: langAtual?.cor }}>{langAtual?.label}</span>
-          <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
-          <span style={{ fontSize: 12, color: '#94a3b8' }}>{nivelAtual?.label}</span>
-          <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
-          <span style={{ fontSize: 12, color: '#64748b' }}>{pctCompleto}%</span>
-        </div>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: langAtual?.cor }}>{langAtual?.label}</span>
+        <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
+        <span style={{ fontSize: 12, color: '#94a3b8' }}>{nivelAtual?.label}</span>
+        <span style={{ color: 'rgba(139,92,246,0.4)' }}>•</span>
+        <span style={{ fontSize: 12, color: '#64748b' }}>{pctCompleto}%</span>
+      </div>
 
         <div style={{ width: 36, flexShrink: 0 }}/>
       </div>
