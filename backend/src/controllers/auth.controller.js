@@ -90,47 +90,6 @@ export const verificarEmail = async (req, res) => {
   }
 }
 
-export const register = async (req, res) => {
-  try {
-    const { nome, email, senha } = req.body
-
-    const usuarioExiste = await Usuario.findOne({ email })
-    if (usuarioExiste) {
-      return res.status(400).json({ message: 'Email já cadastrado' })
-    }
-
-    const senhaCriptografada = await bcrypt.hash(senha, 10)
-    const codigo = gerarCodigo()
-    const expiracao = new Date(Date.now() + 15 * 60 * 1000)
-
-    const usuario = await Usuario.create({
-      nome,
-      email,
-      senha: senhaCriptografada,
-      emailVerificado: false,
-      codigoVerificacao: codigo,
-      codigoExpiracao: expiracao,
-    })
-
-    // Responde imediatamente
-    res.status(201).json({
-      message: 'Cadastro realizado! Verifique seu email.',
-      usuarioId: usuario._id,
-      email: usuario.email,
-    })
-
-    // Envia email em background com log
-    console.log(`Tentando enviar email para: ${email} com código: ${codigo}`)
-    enviarEmailVerificacao(email, nome, codigo)
-      .then(() => console.log(`Email enviado com sucesso para: ${email}`))
-      .catch(err => console.error(`ERRO ao enviar email para ${email}:`, err.message))
-
-  } catch (error) {
-    console.error('Erro no register:', error.message)
-    res.status(500).json({ message: 'Erro no servidor', error: error.message })
-  }
-}
-
 export const reenviarCodigo = async (req, res) => {
   try {
     const { usuarioId } = req.body
