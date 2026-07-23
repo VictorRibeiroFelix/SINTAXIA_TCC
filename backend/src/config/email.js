@@ -1,32 +1,12 @@
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // SSL
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 15000,
-})
-
-// Testa a conexão ao iniciar
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('ERRO na configuração do email:', error.message)
-  } else {
-    console.log('Servidor de email configurado com sucesso!')
-  }
-})
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export const enviarEmailVerificacao = async (email, nome, codigo) => {
-  await transporter.sendMail({
-    from: `"Sintaxia" <${process.env.EMAIL_USER}>`,
+  const { error } = await resend.emails.send({
+    from: 'Sintaxia <onboarding@resend.dev>',
     to: email,
     subject: '🔐 Confirme seu cadastro no Sintaxia',
     html: `
@@ -44,4 +24,7 @@ export const enviarEmailVerificacao = async (email, nome, codigo) => {
       </div>
     `
   })
+
+  if (error) throw new Error(error.message)
+  console.log(`Email enviado com sucesso para: ${email}`)
 }
