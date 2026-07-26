@@ -222,7 +222,7 @@ export default function Perfil() {
         onMouseEnter={e => e.currentTarget.style.background = 'rgba(139,92,246,0.1)'}
         onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
         >
-          🚪 Sair da conta
+          Sair da conta
         </button>
 
         <div style={{ height: 1, background: 'rgba(139,92,246,0.15)', margin: '4px 0' }}/>
@@ -237,7 +237,7 @@ export default function Perfil() {
         onMouseEnter={e => e.currentTarget.style.background = 'rgba(239,68,68,0.1)'}
         onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
         >
-          🗑️ Excluir conta
+          Excluir conta
         </button>
       </div>
       )}
