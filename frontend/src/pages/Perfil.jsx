@@ -51,12 +51,38 @@ export default function Perfil() {
   const [perfil, setPerfil] = useState(null)
   const [carregando, setCarregando] = useState(true)
   const [abaAtiva, setAbaAtiva] = useState('resumo')
+  const [menuAberto, setMenuAberto] = useState(false)
+  const [confirmandoExclusao, setConfirmandoExclusao] = useState(false)
+  const [excluindo, setExcluindo] = useState(false)
+  const menuRef = useRef(null)
   const { logout } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
     buscarDados()
   }, [])
+
+  useEffect(() => {
+  const fn = (e) => {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setMenuAberto(false)
+    }
+  }
+  document.addEventListener('mousedown', fn)
+  return () => document.removeEventListener('mousedown', fn)
+  }, [])
+
+  const excluirConta = async () => {
+  setExcluindo(true)
+  try {
+    await api.delete('/perfil/excluir')
+    logout()
+    navigate('/cadastro')
+  } catch (error) {
+    console.error('Erro ao excluir conta:', error)
+    setExcluindo(false)
+  }
+  }
 
   const buscarDados = async () => {
     try {
@@ -141,30 +167,140 @@ export default function Perfil() {
         backgroundSize: '40px 40px'
       }}/>
 
-      {/* Topbar */}
-      <div style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(10,5,32,0.97)',
-        borderBottom: '1px solid rgba(139,92,246,0.25)',
-        height: 56, display: 'flex', alignItems: 'center',
-        padding: '0 24px', gap: 12
+    {/* Topbar */}
+    <div style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+      background: 'rgba(10,5,32,0.97)',
+      borderBottom: '1px solid rgba(139,92,246,0.25)',
+      height: 56, display: 'flex', alignItems: 'center',
+      padding: '0 24px', gap: 12
+    }}>
+    <span style={{
+      fontSize: 22, fontWeight: 900, marginRight: 'auto',
+      background: 'linear-gradient(135deg,#f472b6,#a78bfa)',
+      WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
+    }}>Sintaxia</span>
+
+    <button onClick={() => navigate('/desafios')} style={{
+      background: 'rgba(139,92,246,0.2)',
+      border: '1px solid rgba(139,92,246,0.4)',
+      borderRadius: 10, padding: '6px 16px',
+      color: '#c4b5fd', fontSize: 13, cursor: 'pointer'
+    }}>🗺️ Mapa</button>
+
+    {/* Menu sanduíche */}
+    <div ref={menuRef} style={{ position: 'relative' }}>
+      <button onClick={() => setMenuAberto(m => !m)} style={{
+        width: 36, height: 36, borderRadius: 8,
+        background: menuAberto ? 'rgba(239,68,68,0.2)' : 'rgba(139,92,246,0.15)',
+        border: `1px solid ${menuAberto ? 'rgba(239,68,68,0.4)' : 'rgba(139,92,246,0.3)'}`,
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center', gap: 4,
+        cursor: 'pointer', transition: 'all 0.2s'
       }}>
-        <span style={{
-          fontSize: 22, fontWeight: 900, marginRight: 'auto',
-          background: 'linear-gradient(135deg,#f472b6,#a78bfa)',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
-        }}>Sintaxia</span>
-        <button onClick={() => navigate('/desafios')} style={{
-          background: 'rgba(139,92,246,0.2)',
-          border: '1px solid rgba(139,92,246,0.4)',
-          borderRadius: 10, padding: '6px 16px',
-          color: '#c4b5fd', fontSize: 13, cursor: 'pointer'
-        }}>🗺️ Mapa</button>
+      {[0,1,2].map(i => (
+        <span key={i} style={{ display: 'block', width: 16, height: 2, background: '#c4b5fd', borderRadius: 2 }}/>
+      ))}
+      </button>
+
+    {menuAberto && (
+      <div style={{
+        position: 'absolute', top: 44, right: 0, zIndex: 200,
+        background: 'rgba(10,5,40,0.99)',
+        border: '1px solid rgba(139,92,246,0.3)',
+        borderRadius: 14, padding: 8, minWidth: 200,
+        boxShadow: '0 8px 40px rgba(0,0,0,0.8)',
+        backdropFilter: 'blur(12px)'
+      }}>
         <button onClick={() => { logout(); navigate('/login') }} style={{
-          background: 'none', border: 'none',
-          color: '#f87171', fontSize: 13, cursor: 'pointer'
-        }}>Sair</button>
+          width: '100%', display: 'flex', alignItems: 'center', gap: 10,
+          padding: '10px 14px', borderRadius: 10, cursor: 'pointer',
+          background: 'transparent', border: 'none',
+          color: '#e2e8f0', fontSize: 13, textAlign: 'left',
+          transition: 'all 0.15s'
+        }}
+        onMouseEnter={e => e.currentTarget.style.background = 'rgba(139,92,246,0.1)'}
+        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+        >
+          🚪 Sair da conta
+        </button>
+
+        <div style={{ height: 1, background: 'rgba(139,92,246,0.15)', margin: '4px 0' }}/>
+
+        <button onClick={() => { setConfirmandoExclusao(true); setMenuAberto(false) }} style={{
+          width: '100%', display: 'flex', alignItems: 'center', gap: 10,
+          padding: '10px 14px', borderRadius: 10, cursor: 'pointer',
+          background: 'transparent', border: 'none',
+          color: '#f87171', fontSize: 13, textAlign: 'left',
+          transition: 'all 0.15s'
+        }}
+        onMouseEnter={e => e.currentTarget.style.background = 'rgba(239,68,68,0.1)'}
+        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+        >
+          🗑️ Excluir conta
+        </button>
       </div>
+      )}
+      </div>
+    </div>
+
+    {/* Modal de confirmação de exclusão */}
+    {confirmandoExclusao && (
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 300,
+      background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: 16
+    }}>
+    <div style={{
+      background: 'linear-gradient(135deg,#1a0a20,#200a0a)',
+      border: '2px solid rgba(239,68,68,0.4)',
+      borderRadius: 20, padding: 36,
+      width: '100%', maxWidth: 400,
+      textAlign: 'center',
+      boxShadow: '0 0 60px rgba(239,68,68,0.2)'
+    }}>
+      <div style={{ fontSize: 52, marginBottom: 16 }}>⚠️</div>
+
+      <h2 style={{ fontSize: 20, fontWeight: 700, color: '#f87171', marginBottom: 12 }}>
+        Excluir conta?
+      </h2>
+
+      <p style={{ color: '#94a3b8', fontSize: 13, lineHeight: 1.7, marginBottom: 24 }}>
+        Essa ação é <strong style={{ color: '#f87171' }}>permanente e irreversível</strong>.
+        Todos os seus dados, progresso, conquistas e amigos serão deletados do banco de dados.
+      </p>
+
+      <div style={{ display: 'flex', gap: 12 }}>
+        <button
+          onClick={() => setConfirmandoExclusao(false)}
+          style={{
+            flex: 1, background: 'rgba(139,92,246,0.2)',
+            border: '1px solid rgba(139,92,246,0.4)',
+            borderRadius: 12, padding: '12px',
+            color: '#c4b5fd', fontWeight: 700,
+            fontSize: 14, cursor: 'pointer'
+          }}>
+          Cancelar
+        </button>
+
+        <button
+          onClick={excluirConta}
+          disabled={excluindo}
+          style={{
+            flex: 1,
+            background: excluindo ? 'rgba(239,68,68,0.3)' : 'linear-gradient(135deg,#991b1b,#ef4444)',
+            border: 'none', borderRadius: 12, padding: '12px',
+            color: '#fff', fontWeight: 700,
+            fontSize: 14, cursor: excluindo ? 'not-allowed' : 'pointer',
+            boxShadow: '0 4px 20px rgba(239,68,68,0.3)'
+          }}>
+          {excluindo ? 'Excluindo...' : '🗑️ Confirmar exclusão'}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
       <div style={{ paddingTop: 72, paddingBottom: 60, maxWidth: 600, margin: '0 auto', padding: '72px 20px 60px' }}>
 

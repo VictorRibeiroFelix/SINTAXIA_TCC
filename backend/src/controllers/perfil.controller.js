@@ -10,6 +10,26 @@ export const getPerfil = async (req, res) => {
   }
 }
 
+export const excluirConta = async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.usuarioId)
+    if (!usuario) return res.status(404).json({ message: 'Usuário não encontrado' })
+
+    // Remove o usuário da lista de amigos de outros usuários
+    await Usuario.updateMany(
+      { amigos: req.usuarioId },
+      { $pull: { amigos: req.usuarioId } }
+    )
+
+    // Deleta o usuário
+    await Usuario.findByIdAndDelete(req.usuarioId)
+
+    res.json({ message: 'Conta excluída com sucesso.' })
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao excluir conta', error: error.message })
+  }
+}
+
 export const atualizarXP = async (req, res) => {
   try {
     const { pontos } = req.body
