@@ -1,15 +1,23 @@
-import * as Brevo from '@getbrevo/brevo'
-import dotenv from 'dotenv'
-dotenv.config()
+import {
+  TransactionalEmailsApi,
+  SendSmtpEmail,
+} from "@getbrevo/brevo";
+import dotenv from "dotenv";
 
-const apiInstance = new Brevo.TransactionalEmailsApi()
-apiInstance.authentications['apiKey'].apiKey = process.env.BREVO_API_KEY
+dotenv.config();
+
+const apiInstance = new TransactionalEmailsApi();
+
+apiInstance.setApiKey(
+  TransactionalEmailsApi.ApiKeys.apiKey,
+  process.env.BREVO_API_KEY
+);
 
 export const enviarEmailVerificacao = async (email, nome, codigo) => {
-  const sendSmtpEmail = new Brevo.SendSmtpEmail()
+  const sendSmtpEmail = new SendSmtpEmail();
 
   sendSmtpEmail.subject = '🔐 Confirme seu cadastro no Sintaxia'
-  sendSmtpEmail.sender = { name: 'Sintaxia', email: 'noreply@sintaxia.com' }
+  sendSmtpEmail.sender = { name: 'Sintaxia', email: 'victor.hugo.rf4@gmail.com' }
   sendSmtpEmail.to = [{ email, name: nome }]
   sendSmtpEmail.htmlContent = `
     <div style="font-family:sans-serif;max-width:480px;margin:0 auto;background:#0a0520;color:white;padding:32px;border-radius:16px;">
