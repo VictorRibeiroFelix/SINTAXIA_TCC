@@ -24,6 +24,14 @@ export function interpretarPortugol(codigo, entradas = '') {
 
   let cursor = 0
 
+  // Remove parênteses externos
+  while (
+    expr.startsWith('(') &&
+    expr.endsWith(')')
+  ) {
+    expr = expr.slice(1, -1).trim()
+  }
+
   // ---- AVALIADOR DE EXPRESSÕES ----
   const avaliarExpressao = (expr) => {
     expr = expr.trim()
@@ -43,7 +51,14 @@ export function interpretarPortugol(codigo, entradas = '') {
         expr.includes('/') || expr.includes('MOD') || expr.includes('mod') ||
         expr.includes('E') || expr.includes('OU') || expr.includes('NAO') ||
         expr.includes('=') || expr.includes('<') || expr.includes('>')) {
-      return avaliarComOperadores(expr)
+      if (expr in variaveis) {
+        return variaveis[expr]
+      }
+      if (!isNaN(expr)) {
+        return Number(expr)
+      }
+
+return expr
     }
 
     // Número

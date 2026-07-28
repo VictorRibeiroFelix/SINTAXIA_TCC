@@ -1,46 +1,36 @@
 # Sintaxia — O Mundo da Programação
 
 <p align="center">
-
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js)
 ![Express](https://img.shields.io/badge/Express-5-000000?style=for-the-badge&logo=express)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb)
 ![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite)
-
 </p>
 
 <p align="center">
-
 Uma plataforma educacional gamificada para o ensino de lógica de programação desenvolvida como Trabalho de Conclusão de Curso (TCC) da FEMA/IMESA.
-
 </p>
 
 ---
 
 # 📚 Sobre o Projeto
-
 O **Sintaxia — O Mundo da Programação** é uma plataforma web criada para tornar o aprendizado de programação mais intuitivo, divertido e motivador.
-
 A proposta combina **gamificação**, desafios progressivos e compilação de código em tempo real para auxiliar estudantes iniciantes na construção do raciocínio lógico.
-
 O projeto foi desenvolvido como **Trabalho de Conclusão de Curso (TCC)** do curso de Sistemas de Informação da **FEMA/IMESA**, em 2026.
-
 ---
 
 # Demonstração Online
-
 Acesse a versão publicada da aplicação:
 
 🌐 **Aplicação:**  
-[sintaxia-tcc.vercel.app]
+sintaxia-tcc.vercel.app
 
 ---
 
 # Funcionalidades
 
 ## 👤 Autenticação
-
 - Cadastro de usuários
 - Login seguro com JWT
 - Verificação de e-mail
@@ -52,7 +42,6 @@ Acesse a versão publicada da aplicação:
 ---
 
 ## 🎯 Sistema de Desafios
-
 - 60 desafios
 - Progressão automática
 - Desbloqueio por módulos
@@ -61,20 +50,17 @@ Acesse a versão publicada da aplicação:
 - Sistema de conquistas
 
 ### Linguagens
-
 - Algoritmos
 - JavaScript
 
 ### Níveis
-
-- 🟢 Iniciante
-- 🟡 Intermediário
-- 🔴 Experiente
+- Iniciante
+- Intermediário
+- Experiente
 
 ---
 
 ## 🧠 Tipos de Desafio
-
 | Tipo | Descrição |
 |-------|-----------|
 | ❓ Pergunta e Resposta | Questões objetivas |
@@ -85,30 +71,22 @@ Acesse a versão publicada da aplicação:
 ---
 
 ## 💻 Editor de Código
-
 O projeto possui dois ambientes diferentes:
 
 ### Portugol
-
 Desenvolvido inteiramente em JavaScript.
-
 ✔ Executado diretamente no navegador
-
 ✔ Não depende de servidor externo
-
 ✔ Interpretador próprio
 
 ---
 
 ### JavaScript
-
 Editor baseado em:
-
 - Monaco Editor
 - Judge0 API
 
 Permite:
-
 - Compilar código online
 - Executar código
 - Exibir saída
@@ -117,9 +95,7 @@ Permite:
 ---
 
 ## 🏆 Gamificação
-
 O sistema possui:
-
 - XP
 - Níveis
 - Medalhas
@@ -127,20 +103,16 @@ O sistema possui:
 - Certificados
 
 ### Conquistas
-
 - 21 conquistas desbloqueáveis
 
 ### Certificados
-
 - 6 certificados
 - Um certificado para cada linguagem e nível concluído
 
 ---
 
 ## 👥 Sistema de Amigos
-
 O Sintaxia possui um sistema social.
-
 Cada usuário recebe um código exclusivo.
 
 Exemplo:
@@ -150,7 +122,6 @@ ABCD-1234
 ```
 
 Também é possível:
-
 - Código único por usuário (ex: ABCD-1234)
 - Adicionar amigos pelo código
 - Compartilhar link de convite
