@@ -40,6 +40,8 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
       setSaida(resultado)
 
       const esperado = normalizar(desafio.respostaCorreta)
+        console.log('Resultado:', JSON.stringify(resultado))
+        console.log('Esperado :', JSON.stringify(esperado))
       if (resultado === esperado) {
         setAcertou(true)
         setTimeout(() => onConcluir(desafio.pontos), 1200)
