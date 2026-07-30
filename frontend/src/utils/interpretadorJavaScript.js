@@ -80,7 +80,7 @@ self.onmessage = function (e) {
  * @param {number} timeoutMs - tempo máximo de execução antes de abortar (laço infinito)
  * @returns {Promise<{sucesso: boolean, saida: string, erro: string|null}>}
  */
-export function executarJavaScript(codigo, entradaTeste = '', timeoutMs = 5000) {
+export function interpretadorJavaScript(codigo, entradaTeste = '', timeoutMs = 5000) {
   return new Promise((resolve) => {
     const linhas = (entradaTeste || '')
       .split('\n')
