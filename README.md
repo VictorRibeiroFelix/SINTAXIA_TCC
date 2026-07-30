@@ -35,7 +35,7 @@ sintaxia-tcc.vercel.app
 - Login seguro com JWT
 - Verificação de e-mail
 - Código de confirmação de 6 dígitos
-- Envio automático pelo Gmail
+- Envio automático pelo Brevo
 - Recuperação de sessão
 - Bloqueio após 3 tentativas incorretas durante 15 minutos
 
@@ -82,15 +82,16 @@ Desenvolvido inteiramente em JavaScript.
 ---
 
 ### JavaScript
-Editor baseado em:
-- Monaco Editor
-- Judge0 API
+Editor baseado em Monaco Editor.
+✔ Executado diretamente no navegador (Web Worker isolado)
+✔ Não depende de servidor externo nem de chave de API
+✔ Simula `readline`/`process.stdin` do Node.js
+✔ Timeout automático contra laços infinitos
 
 Permite:
-- Compilar código online
 - Executar código
 - Exibir saída
-- Mostrar erros de compilação
+- Mostrar erros de execução
 
 ---
 
@@ -180,7 +181,7 @@ O projeto utiliza diversas técnicas de segurança.
 | MongoDB Atlas | Banco |
 | Mongoose | ODM |
 | JWT | Autenticação |
-| Nodemailer | Emails |
+| @getbrevo/brevo | Emails |
 | Helmet | Segurança |
 | express-rate-limit | Proteção |
 | express-validator | Validação |
@@ -192,8 +193,7 @@ O projeto utiliza diversas técnicas de segurança.
 
 | API | Finalidade |
 |------|------------|
-| Judge0 API | Compilador JavaScript |
-| Gmail SMTP | Verificação de email |
+| Brevo | Verificação de email |
 
 ---
 
@@ -217,7 +217,8 @@ sintaxia/
 │   │   │   └── EditorCodigo
 │   │   │
 │   │   └── utils/
-│   │       └── interpretadorPortugol.js
+│   │       ├── interpretadorPortugol.js
+│   │       └── interpretadorJavaScript.js
 │
 ├── backend/
 │   ├── src/
@@ -236,10 +237,8 @@ sintaxia/
 
 - Node.js 18+
 - MongoDB Atlas
-- Conta Gmail
-- Senha de aplicativo Gmail
-- RapidAPI
-- Judge0 API
+- Conta Brevo
+- Chave de API do Brevo
 
 ---
 
@@ -278,9 +277,9 @@ MONGO_URI=
 
 JWT_SECRET=
 
-EMAIL_USER=
+BREVO_API_KEY=
 
-EMAIL_PASS=
+BREVO_SENDER_EMAIL=
 
 FRONTEND_URL=http://localhost:5173
 
@@ -414,7 +413,7 @@ Criar uma plataforma moderna que torne o aprendizado de programação mais acess
 
 **Curso**
 
-Sistemas de Informação
+Ciência da Computação
 
 **Instituição**
 
@@ -442,6 +441,6 @@ Orientador:
 
 ---
 
-# ⭐ Agradecimentos
+# Agradecimentos
 
 Agradecimentos aos professores, colegas e à FEMA/IMESA pelo apoio durante o desenvolvimento deste projeto.
