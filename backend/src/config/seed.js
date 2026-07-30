@@ -1507,7 +1507,7 @@ rl.on("line",(linha)=>{
 
 entradaTeste:'5',
 
-respostaCorreta:'1\\n2\\nFizz\\n4\\nBuzz',
+respostaCorreta:'1 2 Fizz 4 Buzz',
 
 opcoes:[],
 
