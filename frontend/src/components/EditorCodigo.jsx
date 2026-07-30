@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import Editor from '@monaco-editor/react'
 import { interpretarPortugol } from '../utils/interpretadorPortugol'
-
-const JUDGE0_KEY = '2877bc76aemshcb45e685c6f6dbfp1ccc52jsnd3458e4a2731'
+import { interpretadorJavaScript } from '../utils/interpretadorJavaScript'
 
 export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar }) {
   const [codigo, setCodigo] = useState(desafio.codigoBase || '')
@@ -23,43 +22,11 @@ export default function EditorCodigo({ desafio, linguagem, onConcluir, onFechar 
     return normalizar(resultado.saida)
   }
 
-const rodarJavaScript = async () => {
-  const response = await fetch(
-    'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-RapidAPI-Key': JUDGE0_KEY,
-        'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
-      },
-      body: JSON.stringify({
-        language_id: 63,
-        source_code: codigo,
-        stdin: desafio.entradaTeste || '',
-      }),
-    }
-  )
-
-  if (!response.ok) {
-    const texto = await response.text()
-    throw new Error(`Erro na API Judge0 (HTTP ${response.status}): ${texto}`)
+  const rodarJavaScript = async () => {
+    const resultado = await interpretadorJavaScript(codigo, desafio.entradaTeste || '')
+    if (!resultado.sucesso) throw new Error(resultado.erro)
+    return normalizar(resultado.saida)
   }
-
-  const data = await response.json()
-  console.log('Resposta bruta do Judge0:', data) // temporário, para depurar
-
-  // Erros de RapidAPI (cota estourada, chave inválida etc.) não vêm em
-  // data.stderr/compile_output — vêm em data.message
-  if (data.message) throw new Error(`Erro Judge0/RapidAPI: ${data.message}`)
-  if (data.stderr && data.stderr.trim()) throw new Error(data.stderr)
-  if (data.compile_output && data.compile_output.trim()) throw new Error(data.compile_output)
-  if (data.stdout === null || data.stdout === undefined) {
-    throw new Error(`Sem stdout retornado. status: ${JSON.stringify(data.status)}`)
-  }
-
-  return normalizar(data.stdout)
-}
 
   const rodarCodigo = async () => {
     setRodando(true)
