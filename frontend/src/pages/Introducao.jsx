@@ -345,7 +345,7 @@ export default function Introducao() {
 
       {/* Topbar */}
       <div style={{
-        position: 'fixed', top: 0, left: 136, right: 136, zIndex: 100,
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         background: 'rgba(10,5,32,0.97)',
         borderBottom: '1px solid rgba(139,92,246,0.25)',
         height: 56, display: 'flex', alignItems: 'center',
