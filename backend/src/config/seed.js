@@ -381,7 +381,7 @@ codigoBase: `Inicio
 
 Fim`,
 entradaTeste: '70 1.75',
-respostaCorreta: '22.85',
+respostaCorreta: '22.86',
 opcoes: [],
 pontos: 25
 },
