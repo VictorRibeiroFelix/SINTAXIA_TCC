@@ -28,6 +28,9 @@ Acesse a versão publicada da aplicação:
 🌐 **Aplicação:**  
 sintaxia-tcc.vercel.app
 
+📄 Documentação (TCC completo):
+docs/SINTAXIA_O_MUNDO_DA_PROGRAMAÇÃO.docx
+
 ---
 
 # Funcionalidades
