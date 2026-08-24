@@ -26,10 +26,10 @@ O projeto foi desenvolvido como **Trabalho de Conclusão de Curso (TCC)** do cur
 Acesse a versão publicada da aplicação:
 
 🌐 **Aplicação:**  
-sintaxia-tcc.vercel.app
+[sintaxia-tcc.vercel.app]
 
-📄 Documentação (TCC completo):
-docs/SINTAXIA_O_MUNDO_DA_PROGRAMAÇÃO.docx
+📄 **Documentação (TCC completo):**
+[docs/SINTAXIA_O_MUNDO_DA_PROGRAMAÇÃO.docx]
 
 ---
 
